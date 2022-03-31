@@ -60,7 +60,7 @@
           <element id="library" level="project" name="Maven: javax.activation:javax.activation-api:1.2.0" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="hello/web/Web" />
+      <element id="javaee-facet-resources" facet="election-machine/web/Web" />
     </root>
   </artifact>
 </component>
