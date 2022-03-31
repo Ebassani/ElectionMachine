@@ -10,15 +10,14 @@
 body {
   min-height: 100vh;
   width: 100vw;
+  background-image: linear-gradient(#614385, #516395);
+  background-size: 100%;
 
 }
 
 .main {
   display: flex;
-  height: 100vh;
-  background-image: linear-gradient(#614385, #516395);
-  background-repeat: no-repeat;
-  background-size: 100%;
+  min-height: 100vh;
   width: 100vw;
   justify-content: center;
   align-items: center;
@@ -26,7 +25,7 @@ body {
 }
 
 .start {
-  color: antiquewhite;
+  color: beige;
   width: 330px;
   height: 100px;
   min-width: 330px;
@@ -64,9 +63,104 @@ body {
   justify-content: center;
 }
 a {
-  color: antiquewhite;
+  color: beige;
   text-decoration: none;
 }
+//QUIZZ PAGE
 
+.question{
+  display: flex;
+  font-size: 2em;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+.statement{
+  color: beige;
+  margin-bottom: 3%;
+  width: 100%;
+  text-align: center;
 
+}
+.decision{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.options{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 35%;
+}
+.agree{
+  color: green;
+  -webkit-text-stroke: 0.5px black;
+}
+.option-agree{
+  border: 4px solid green;
+  border-radius: 40px;
+  margin-right: 5%;
+}
+.option-agree:hover{
+  background-color: green;
+  cursor: pointer;
+}
 
+.neutral{
+  border: 4px solid grey;
+  border-radius: 20px;
+  min-width: 2rem;
+  min-height: 2rem;
+  margin-right: 5%;
+}
+.neutral:hover{
+  background-color: gray;
+  cursor: pointer;
+}
+.disagree{
+  color: red;
+  -webkit-text-stroke: 0.5px black;
+}
+.option-disagree{
+  border: 4px solid red;
+  border-radius: 50px;
+  margin-left: 5%;
+
+}
+.option-disagree:hover{
+  background-color: red;
+  cursor: pointer;
+}
+
+.option-agree:first-child{
+  min-width: 5rem;
+  min-height: 5rem;
+}
+.option-agree:nth-child(2){
+  min-width: 4rem;
+  min-height:  4rem;
+}
+.option-agree:nth-child(3){
+  min-width: 3rem;
+  min-height: 3rem;
+}
+.option-disagree:nth-child(5){
+  min-height: 3rem;
+  min-width: 3rem;
+  margin-left: 0;
+}
+.option-disagree:nth-child(6){
+  min-height: 4rem;
+  min-width: 4rem;
+}
+.option-disagree:nth-child(7){
+  min-height: 5rem;
+  min-width: 5rem;
+}
