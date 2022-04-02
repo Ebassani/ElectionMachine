@@ -1,9 +1,6 @@
 package com.github.ebassani.electionmachine;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class QuestionManagement {
 
@@ -54,7 +51,19 @@ public class QuestionManagement {
         }
     }
 
-    public ResultSet selectAllCats() throws SQLException {
-        return statement.executeQuery("select * from questions");
+    // Function returns a string that can be used to print questions
+    public String printQuestions() throws SQLException {
+        String questions="";
+        ResultSet resultSet = statement.executeQuery("SELECT * from questions");
+        ResultSetMetaData rsmd = resultSet.getMetaData();
+        int columnsNumber = rsmd.getColumnCount();
+        while (resultSet.next()) {
+            for (int i = 1; i <= columnsNumber; i++) {
+                if (i > 1) questions+=(": ");
+                String columnValue = resultSet.getString(i);
+                questions+=(rsmd.getColumnName(i) + " " + columnValue);
+            }
+        }
+        return questions;
     }
 }
