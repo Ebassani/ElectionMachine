@@ -1,5 +1,8 @@
 package com.github.ebassani.electionmachine;
 
+import com.github.ebassani.electionmachine.data.QuestionDao;
+import com.github.ebassani.electionmachine.data.model.Question;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,9 +24,9 @@ public class AdminQuestions extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
-        QuestionManagement qm= null;
+        QuestionDao qm= null;
         try {
-            qm = new QuestionManagement();
+            qm = new QuestionDao();
         } catch (Exception e) {
 
         }

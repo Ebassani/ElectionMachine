@@ -1,15 +1,16 @@
-package com.github.ebassani.electionmachine;
+package com.github.ebassani.electionmachine.data;
 
 import com.github.ebassani.electionmachine.data.Database;
+import com.github.ebassani.electionmachine.data.model.Question;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class QuestionManagement {
+public class QuestionDao {
 
     Database db = Database.getInstance();
 
-    public QuestionManagement() throws Exception {
+    public QuestionDao() throws Exception {
         try {
              Database.getInstance();
         } catch (Exception e) {
