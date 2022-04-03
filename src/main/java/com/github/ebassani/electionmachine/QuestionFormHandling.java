@@ -44,14 +44,14 @@ public class QuestionFormHandling extends HttpServlet {
 
 
         try {
-            response.getWriter().println(var.getQuestion(2));
+            response.getWriter().println(var.getQuestionWithId(2).getQuestion());
         } catch (SQLException e) {
             e.printStackTrace();
         }
         try {
-            String[] array = var.printQuestions();
+            Question[] array = var.getQuestions();
             for (int i=0;i<array.length;i++) {
-                response.getWriter().println(array[i]);
+                response.getWriter().println(array[i].getQuestion());
             }
         } catch (SQLException e) {
             e.printStackTrace();
