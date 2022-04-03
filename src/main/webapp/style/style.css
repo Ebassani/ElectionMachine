@@ -9,8 +9,9 @@
 body {
   min-height: 100vh;
   width: 100vw;
-  background-image: linear-gradient(#614385, #516395);
-  background-size: 100%;
+  background-image: url("../images/background1.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .main {
@@ -103,13 +104,13 @@ a {
 
 .agree {
   color: green;
-  -webkit-text-stroke: 0.5px black;
+  -webkit-text-stroke: 0.4px black;
 }
 
 .option-agree {
-  border: 4px solid green;
+  border: 5px solid green;
   border-radius: 40px;
-  margin-right: 5%;
+  margin-right: 3%;
 }
 
 .option-agree:hover {
@@ -118,11 +119,11 @@ a {
 }
 
 .neutral {
-  border: 4px solid grey;
+  border: 5px solid grey;
   border-radius: 20px;
-  min-width: 2rem;
-  min-height: 2rem;
-  margin-right: 5%;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  margin-right: 3%;
 }
 
 .neutral:hover {
@@ -132,13 +133,13 @@ a {
 
 .disagree {
   color: red;
-  -webkit-text-stroke: 0.5px black;
+  -webkit-text-stroke: 0.4px black;
 }
 
 .option-disagree {
   border: 4px solid red;
   border-radius: 50px;
-  margin-left: 5%;
+  margin-left: 3%;
 }
 
 .option-disagree:hover {
@@ -147,34 +148,34 @@ a {
 }
 
 .option-agree:first-child {
-  min-width: 5rem;
-  min-height: 5rem;
+  min-width: 4.5rem;
+  min-height: 4.5rem;
 }
 
 .option-agree:nth-child(2) {
-  min-width: 4rem;
-  min-height: 4rem;
+  min-width: 3.5rem;
+  min-height: 3.5rem;
 }
 
 .option-agree:nth-child(3) {
-  min-width: 3rem;
-  min-height: 3rem;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
 }
 
 .option-disagree:nth-child(5) {
-  min-height: 3rem;
-  min-width: 3rem;
+  min-height: 2.5rem;
+  min-width: 2.5rem;
   margin-left: 0;
 }
 
 .option-disagree:nth-child(6) {
-  min-height: 4rem;
-  min-width: 4rem;
+  min-height: 3.5rem;
+  min-width: 3.5rem;
 }
 
 .option-disagree:nth-child(7) {
-  min-height: 5rem;
-  min-width: 5rem;
+  min-height: 4.5rem;
+  min-width: 4.5rem;
 }
 
 /*# sourceMappingURL=style.css.map */
