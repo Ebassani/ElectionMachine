@@ -13,7 +13,7 @@ public class Constants {
     public static String DB_PASSWORD;
 
     public static void load() throws Exception {
-        
+
         DB_ADDRESS = loadSecret("DB_ADDRESS");
         DB_PORT = loadSecret("DB_PORT");
         DB_DATABASE = loadSecret("DB_DATABASE");

@@ -14,7 +14,7 @@ public class Database {
     private Database() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
         conn = java.sql.DriverManager.getConnection(
-                "jdbc:mysql:// + " + Constants.DB_ADDRESS + ":" + Constants.DB_PORT + "/" + Constants.DB_DATABASE,
+                "jdbc:mysql://" + Constants.DB_ADDRESS + ":" + Constants.DB_PORT + "/" + Constants.DB_DATABASE,
                 Constants.DB_USERNAME,
                 Constants.DB_PASSWORD
         );
