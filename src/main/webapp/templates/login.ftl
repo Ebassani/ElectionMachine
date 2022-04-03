@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="user" type="com.github.ebassani.electionmachine.data.model.User" -->
+<#-- @ftlvariable name="error" type="java.lang.String" -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,10 +7,11 @@
 <body>
 
 <form action="/login" method="post">
-    <label for="username">Username</label><input type="text" name="username" id="username">
+    <label for="email">Email</label><input type="email" name="email" id="email">
     <label for="password">Password</label><input type="password" name="password" id="password">
-    <input type="submit" value="Login"/>${user.names}
+    <input type="submit" value="Login"/>
 </form>
+<span>${error}</span>
 
 </body>
 </html>
