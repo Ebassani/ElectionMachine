@@ -53,34 +53,51 @@ public class AdminQuestions extends HttpServlet {
         for (int i=0;i<questions.length;i++){
             out.print("<div>");
             out.print(questions[i].getQuestion());
-            out.print("<button id=\"butt\" onclick=\"getQuestion" +
-                    "("+questions[i].getId()+",\'"+questions[i].getQuestion()+"\')\">Edit</button>");
-            out.print("<button>Delete</button>");
+            out.print("<button onclick=\"getQuestion" +
+                    "('"+questions[i].getId()+"',\'"+questions[i].getQuestion()+"\')\">Edit</button>");
+            out.print("<button onclick=\"delQuestion('"+questions[i].getId()+"')\">Delete</button>");
             out.print("</div>");
         }
         out.print("</div>");
 
-        out.print("<div id=\"hey\" class=\"popup hidden\">"+
-                "<form>" +
-                "<input type=\"hidden\" id='id' name='id' value=''>"+
+        out.print("<div id='popup' class=\"popup hidden\">"+
+                "<form method='post' action='/questionHandler'>" +
+                "<input type=\"hidden\" id='q_id' name='id' value=''>"+
                 "<input type=\"text\" id='question' name='question' " +
                 "placeholder='Your question here' value=''>" +
                 "<input type=\"submit\">"+
                 "</form>"+
                 "</div>");
 
-        out.print("</div>");
+        out.print("<div id=\"delete\" class=\"popup hidden\">" +
+                "<h3>Are you sure you want to delete this question?</h3>"+
+                "<form method='post' action='/questionHandler'>" +
+                "<input type=\"hidden\" id='id' name='id' value=''>"+
+                "<input type=\"submit\" value='YES'>" +
+                "<button type='button'>NO</button>"+
+                "</form>"+
+                "</div>");
 
+        out.print("<div id=\"delete\" class=\"popup hidden\">" +
+                "<h3>Write the new question here:</h3>"+
+                "<form method='post' action='/questionHandler'>" +
+                "<input type=\"text\" name='question'>"+
+                "<input type=\"submit\">" +
+                "</form>"+
+                "</div>");
 
         out.print("</body>" +
                 "<script>" +
-                "function change() {" +
-                "    document.getElementById(\"butt\").innerHTML = \"hello\"" +
+
+                "function getQuestion(id,question) {" +
+                "    document.getElementById(\"question\").value = question;" +
+                "    document.getElementById(\"q_id\").value = id" +
+                "};" +
+
+                "function delQuestion(id) {" +
+                "document.getElementById(\"id\").value = id" +
                 "}" +
-                "function getQuestion(number,question) {" +
-                "    document.getElementById(\"question\").value = question" +
-//                "    document.getElementById(\"id\").value = number" +
-                "}" +
+
                 "</script>" +
                 "</html>");
     }
