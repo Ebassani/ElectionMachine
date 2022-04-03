@@ -67,6 +67,20 @@ public class QuestionManagement {
         return q;
     }
 
+    public int[] questionIds()throws SQLException {
+        ResultSet resultSet = statement.executeQuery("SELECT * from questions");
+
+        ArrayList<Integer> ids = new ArrayList<>();
+        while (resultSet.next()){
+            ids.add(Integer.parseInt(resultSet.getString("id")));
+        }
+        int[] id= new int[ids.size()-1];
+        for (int i=0;i< id.length;i++){
+            id[i]=ids.get(i+1);
+        }
+        return id;
+    }
+
     // Returns a question based on the id informed by the parameter
     public String getQuestion(int id) throws SQLException {
         String question = "The question with id " + id + " does not exist!";
