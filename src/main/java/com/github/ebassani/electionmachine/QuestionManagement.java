@@ -45,42 +45,32 @@ public class QuestionManagement {
     }
 
     // Function returns an array that contains all the questions that can be used to print questions
-    public String[] printQuestions() throws SQLException {
+    public Question[] getQuestions() throws SQLException {
+
         ResultSet resultSet = db.statement.executeQuery("SELECT * from questions");
 
-        ArrayList<String> questions = new ArrayList<String>();
+        ArrayList<Question> questions = new ArrayList<>();
         while (resultSet.next()){
-            questions.add(resultSet.getString("text"));
+            String question= resultSet.getString("text");
+            int id = Integer.parseInt(resultSet.getString("id"));
+            questions.add(new Question(id,question));
         }
-        String[] q= new String[questions.size()];
+        Question[] q= new Question[questions.size()];
         for (int i=0;i< q.length;i++){
             q[i]=questions.get(i);
         }
         return q;
     }
 
-    public int[] questionIds()throws SQLException {
-        ResultSet resultSet = db.statement.executeQuery("SELECT * from questions");
-
-        ArrayList<Integer> ids = new ArrayList<>();
-        while (resultSet.next()){
-            ids.add(Integer.parseInt(resultSet.getString("id")));
-        }
-        int[] id= new int[ids.size()];
-        for (int i=0;i< id.length;i++){
-            id[i]=ids.get(i);
-        }
-        return id;
-    }
-
     // Returns a question based on the id informed by the parameter
-    public String getQuestion(int id) throws SQLException {
+    public Question getQuestionWithId(int id) throws SQLException {
         String question = "The question with id " + id + " does not exist!";
         ResultSet resultSet = db.statement.executeQuery("SELECT * from questions " +
                 "where id='" + id + "'");
         while (resultSet.next()) {
             question = resultSet.getString("text");
         }
-        return question;
+
+        return new Question(id, question);
     }
 }
