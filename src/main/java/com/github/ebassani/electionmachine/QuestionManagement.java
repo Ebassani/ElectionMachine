@@ -1,6 +1,7 @@
 package com.github.ebassani.electionmachine;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class QuestionManagement {
 
@@ -36,7 +37,7 @@ public class QuestionManagement {
     // Function that edits a question, changes the text on the question that has it's ID informed
     public void updateQuestion(String text, int id) {
         try {
-            statement.executeUpdate("UPDATE questions SET message='" + text + "' WHERE id='"+ id +"'");
+            statement.executeUpdate("UPDATE questions SET message='" + text + "' WHERE id='" + id + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -45,25 +46,35 @@ public class QuestionManagement {
     // Function that deletes the question of whose ID was put in the parameter
     public void deleteQuestion(int id) {
         try {
-            statement.executeUpdate("DELETE FROM questions WHERE id='"+ id +"'");
+            statement.executeUpdate("DELETE FROM questions WHERE id='" + id + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    // Function returns a string that can be used to print questions
-    public String printQuestions() throws SQLException {
-        String questions="";
+    // Function returns an array that contains all the questions that can be used to print questions
+    public String[] printQuestions() throws SQLException {
         ResultSet resultSet = statement.executeQuery("SELECT * from questions");
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
-        while (resultSet.next()) {
-            for (int i = 1; i <= columnsNumber; i++) {
-                if (i > 1) questions+=(": ");
-                String columnValue = resultSet.getString(i);
-                questions+=(rsmd.getColumnName(i) + " " + columnValue);
-            }
+
+        ArrayList<String> questions = new ArrayList<String>();
+        while (resultSet.next()){
+            questions.add(resultSet.getString("message"));
         }
-        return questions;
+        String[] q= new String[questions.size()-1];
+        for (int i=0;i< q.length;i++){
+            q[i]=questions.get(i+1);
+        }
+        return q;
+    }
+
+    // Returns a question based on the id informed by the parameter
+    public String getQuestion(int id) throws SQLException {
+        String question = "The question with id " + id + " does not exist!";
+        ResultSet resultSet = statement.executeQuery("SELECT * from questions " +
+                "where id='" + id + "'");
+        while (resultSet.next()) {
+            question = resultSet.getString("message");
+        }
+        return question;
     }
 }
