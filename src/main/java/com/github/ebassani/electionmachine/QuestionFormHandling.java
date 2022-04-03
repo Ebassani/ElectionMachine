@@ -48,6 +48,8 @@ public class QuestionFormHandling extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+
         try {
             Question[] array = var.getQuestions();
             for (int i=0;i<array.length;i++) {

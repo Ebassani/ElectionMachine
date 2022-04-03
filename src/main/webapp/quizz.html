@@ -1,27 +1,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+<head>
+    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8"/>
     <link rel="stylesheet" href="style/style.css">
     <title>Quizz</title>
-  </head>
-  <body>
-    <div class="question">
-      <div class="statement">You hate LGBTQ</div>
-      <div class="decision">
+</head>
+<body>
+<form method="post" action="/quizz">
+<div class="question">
+    <div class="statement" name="statement"> </div>
+    <div class="decision">
         <div class="agree">Agree</div>
         <div class="options">
-          <div class="option-agree" id="option-agree-best"></div>
-          <div class="option-agree" id="option-agree-middle"></div>
-          <div class="option-agree" id="option-agree-first"></div>
-          <div class="neutral"></div>
-          <div class="option-disagree" id="option-disagree-first"></div>
-          <div class="option-disagree" id="option-disagree-middle"></div>
-          <div class="option-disagree" id="option-disagree-worst"></div>
+            <div class="option-agree"> <input type="radio" name="choice"></div>
+            <div class="option-agree"> <input type="radio" name="choice"></div>
+            <div class="option-agree"> <input type="radio" name="choice"></div>
+            <div class="neutral"><input type="radio" name="choice"></div>
+            <div class="option-disagree"><input type="radio" name="choice"></div>
+            <div class="option-disagree"><input type="radio" name="choice"></div>
+            <div class="option-disagree"><input type="radio" name="choice"></div>
         </div>
         <div class="disagree">Disagree</div>
-      </div>
-
     </div>
-  </body>
+    <input type="submit" value="Submit" class="submit-button">
+</div>
+
+</form>
+</body>
 </html>

@@ -5,6 +5,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
+
 }
 
 body {
@@ -13,6 +14,7 @@ body {
   background-image: url("../images/background1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  overflow-x: hidden;
 }
 
 .main {
@@ -84,6 +86,9 @@ a {
   text-align: center;
 
 }
+.statement:first-child{
+  margin-top: 3%;
+}
 .decision{
   display: flex;
   width: 100%;
@@ -91,6 +96,7 @@ a {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+
 }
 .options{
   display: flex;
@@ -100,6 +106,7 @@ a {
   width: 35%;
 }
 .agree{
+  font-size: 2rem;
   color: green;
   -webkit-text-stroke: 0.4px black;
 }
@@ -113,20 +120,23 @@ a {
   cursor: pointer;
 }
 
-.neutral{
+.neutral > input{
   border: 5px solid grey;
   border-radius: 20px;
   min-width: 1.5rem;
   min-height: 1.5rem;
   margin-right: 3%;
+  display: block;
 }
 .neutral:hover{
   background-color: gray;
   cursor: pointer;
 }
 .disagree{
+  font-size: 2rem;
   color: red;
-  -webkit-text-stroke: 0.4px black;
+  -webkit-text-stroke: 0.9px black;
+  margin-bottom: 4%;
 }
 .option-disagree{
   border: 4px solid red;
@@ -139,28 +149,57 @@ a {
   cursor: pointer;
 }
 
-.option-agree:first-child{
+.option-agree:first-child > input{
   min-width: 4.5rem;
   min-height: 4.5rem;
+  display: block;
+
 }
-.option-agree:nth-child(2){
+.option-agree:nth-child(2) > input{
   min-width: 3.5rem;
   min-height:  3.5rem;
+  display: block;
 }
-.option-agree:nth-child(3){
+.option-agree:nth-child(3) > input {
   min-width: 2.5rem;
   min-height: 2.5rem;
+  display: block;
 }
-.option-disagree:nth-child(5){
+
+.option-disagree:nth-child(5) > input{
   min-height: 2.5rem;
   min-width: 2.5rem;
   margin-left: 0;
+  display: block;
 }
-.option-disagree:nth-child(6){
+.option-disagree:nth-child(6) > input{
   min-height: 3.5rem;
   min-width: 3.5rem;
+  display: block;
 }
-.option-disagree:nth-child(7){
+.option-disagree:nth-child(7) > input {
   min-height: 4.5rem;
   min-width: 4.5rem;
+  display: block;
+}
+.submit-button {
+  color: beige;
+  width: 150px;
+  height: 40px;
+  min-width: 150px;
+  min-height:40px;
+  font-size: 1.2rem;
+  text-align: center;
+  border-radius: 15px;
+  user-select: none;
+  margin-bottom: 3%;
+  background-image: linear-gradient(#4568dc, #004e92);
+}
+
+.submit-button:hover {
+  background-image: linear-gradient(#004e92, #4568dc);
+}
+
+.submit-button:active {
+  border: none;
 }
