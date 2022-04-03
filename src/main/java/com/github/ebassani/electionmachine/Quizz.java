@@ -1,5 +1,7 @@
 package com.github.ebassani.electionmachine;
 
+import com.github.ebassani.electionmachine.data.QuestionDao;
+import com.github.ebassani.electionmachine.data.model.Question;
 import j2html.tags.specialized.TbodyTag;
 
 import javax.servlet.annotation.WebServlet;
@@ -23,9 +25,9 @@ public class Quizz extends HttpServlet {
 
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
-        QuestionManagement var = null;
+        QuestionDao var = null;
         try {
-            var = new QuestionManagement();
+            var = new QuestionDao();
         } catch (Exception e) {
             e.printStackTrace();
         }

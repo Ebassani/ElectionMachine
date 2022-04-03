@@ -1,5 +1,6 @@
-package com.github.ebassani.electionmachine;
+package com.github.ebassani.electionmachine.servlet;
 
+import com.github.ebassani.electionmachine.FMConfiguration;
 import com.github.ebassani.electionmachine.data.Database;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
