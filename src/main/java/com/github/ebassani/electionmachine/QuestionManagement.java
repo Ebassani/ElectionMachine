@@ -1,25 +1,17 @@
 package com.github.ebassani.electionmachine;
 
+import com.github.ebassani.electionmachine.data.Database;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 public class QuestionManagement {
 
-    Connection conn;
-    Statement statement;
+    Database db = Database.getInstance();
 
-    // Local database in Eduardo's computer, probably going to be changed later.
-    static final String ADDRESS = "jdbc:mysql://localhost:3306/";
-    static final String DB_NAME = "electionMachine";
-    static final String DB_USER = "root";
-    static final String DB_PASSWORD = "Bussi69!";
-
-
-    public QuestionManagement() {
+    public QuestionManagement() throws Exception {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
-            conn = java.sql.DriverManager.getConnection(ADDRESS + DB_NAME, DB_USER, DB_PASSWORD);
-            statement = conn.createStatement();
+             Database.getInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -28,7 +20,7 @@ public class QuestionManagement {
     // Function that creates a question, requires the text.
     public void createQuestion(String text) {
         try {
-            statement.executeUpdate("INSERT INTO questions(message) VALUES('" + text + "')");
+            db.statement.executeUpdate("INSERT INTO questions(text) VALUES('" + text + "')");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -37,7 +29,7 @@ public class QuestionManagement {
     // Function that edits a question, changes the text on the question that has it's ID informed
     public void updateQuestion(String text, int id) {
         try {
-            statement.executeUpdate("UPDATE questions SET message='" + text + "' WHERE id='" + id + "'");
+            db.statement.executeUpdate("UPDATE questions SET text='" + text + "' WHERE id='" + id + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,7 +38,7 @@ public class QuestionManagement {
     // Function that deletes the question of whose ID was put in the parameter
     public void deleteQuestion(int id) {
         try {
-            statement.executeUpdate("DELETE FROM questions WHERE id='" + id + "'");
+            db.statement.executeUpdate("DELETE FROM questions WHERE id='" + id + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,29 +46,29 @@ public class QuestionManagement {
 
     // Function returns an array that contains all the questions that can be used to print questions
     public String[] printQuestions() throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT * from questions");
+        ResultSet resultSet = db.statement.executeQuery("SELECT * from questions");
 
         ArrayList<String> questions = new ArrayList<String>();
         while (resultSet.next()){
-            questions.add(resultSet.getString("message"));
+            questions.add(resultSet.getString("text"));
         }
-        String[] q= new String[questions.size()-1];
+        String[] q= new String[questions.size()];
         for (int i=0;i< q.length;i++){
-            q[i]=questions.get(i+1);
+            q[i]=questions.get(i);
         }
         return q;
     }
 
     public int[] questionIds()throws SQLException {
-        ResultSet resultSet = statement.executeQuery("SELECT * from questions");
+        ResultSet resultSet = db.statement.executeQuery("SELECT * from questions");
 
         ArrayList<Integer> ids = new ArrayList<>();
         while (resultSet.next()){
             ids.add(Integer.parseInt(resultSet.getString("id")));
         }
-        int[] id= new int[ids.size()-1];
+        int[] id= new int[ids.size()];
         for (int i=0;i< id.length;i++){
-            id[i]=ids.get(i+1);
+            id[i]=ids.get(i);
         }
         return id;
     }
@@ -84,10 +76,10 @@ public class QuestionManagement {
     // Returns a question based on the id informed by the parameter
     public String getQuestion(int id) throws SQLException {
         String question = "The question with id " + id + " does not exist!";
-        ResultSet resultSet = statement.executeQuery("SELECT * from questions " +
+        ResultSet resultSet = db.statement.executeQuery("SELECT * from questions " +
                 "where id='" + id + "'");
         while (resultSet.next()) {
-            question = resultSet.getString("message");
+            question = resultSet.getString("text");
         }
         return question;
     }

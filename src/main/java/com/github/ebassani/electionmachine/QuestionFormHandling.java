@@ -15,7 +15,12 @@ import java.sql.SQLException;
 public class QuestionFormHandling extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        QuestionManagement var = new QuestionManagement();
+        QuestionManagement var = null;
+        try {
+            var = new QuestionManagement();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         String text = request.getParameter("question");
 
@@ -36,6 +41,7 @@ public class QuestionFormHandling extends HttpServlet {
                 response.getWriter().println("Nothing happened");
             }
         }
+
 
         try {
             response.getWriter().println(var.getQuestion(2));
