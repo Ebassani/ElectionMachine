@@ -1,11 +1,12 @@
 package com.github.ebassani.electionmachine;
 
+import com.github.ebassani.electionmachine.data.QuestionDao;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 
 @WebServlet(
         name = "questionHandler",
@@ -15,9 +16,9 @@ import java.sql.SQLException;
 public class QuestionFormHandling extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        QuestionManagement var = null;
+        QuestionDao var = null;
         try {
-            var = new QuestionManagement();
+            var = new QuestionDao();
         } catch (Exception e) {
             e.printStackTrace();
         }

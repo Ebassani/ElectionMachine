@@ -72,6 +72,7 @@
           <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.4.0-b180830.0359" />
           <element id="library" level="project" name="Maven: javax.activation:javax.activation-api:1.2.0" />
           <element id="library" level="project" name="Maven: com.j2html:j2html:1.5.0" />
+          <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.31" />
         </element>
       </element>
       <element id="directory" name="META-INF">
