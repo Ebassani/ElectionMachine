@@ -7,17 +7,4 @@
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <!--suppress ServletWithoutMappingInspection -->
-    <servlet-name>InitParamTest</servlet-name>
-    <init-param>
-      <param-name>email</param-name>
-      <param-value>djsushi123@gmail.com</param-value>
-    </init-param>
-  </servlet>
-
-  <context-param>
-    <param-name>email</param-name>
-    <param-value>djsushi123@gmail.com</param-value>
-  </context-param>
 </web-app>
