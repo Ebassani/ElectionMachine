@@ -27,6 +27,7 @@ public class Dao {
     public void createCat(String breed, String weight) {
         try {
             statement.executeUpdate("insert into gametable(breed, weight) values('" + breed + "', " + weight + ")");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
