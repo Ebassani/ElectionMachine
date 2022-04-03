@@ -1,15 +1,16 @@
-package com.github.ebassani.electionmachine;
+package com.github.ebassani.electionmachine.data;
 
 import com.github.ebassani.electionmachine.data.Database;
+import com.github.ebassani.electionmachine.data.model.Question;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class QuestionManagement {
+public class QuestionDao {
 
     Database db = Database.getInstance();
 
-    public QuestionManagement() throws Exception {
+    public QuestionDao() throws Exception {
         try {
              Database.getInstance();
         } catch (Exception e) {
@@ -26,7 +27,7 @@ public class QuestionManagement {
         }
     }
 
-    // Function that edits a question, changes the text on the question that has it's ID informed
+    // Function that edits a question, changes the text on the question that has its ID informed
     public void updateQuestion(String text, int id) {
         try {
             db.statement.executeUpdate("UPDATE questions SET text='" + text + "' WHERE id='" + id + "'");
@@ -38,6 +39,7 @@ public class QuestionManagement {
     // Function that deletes the question of whose ID was put in the parameter
     public void deleteQuestion(int id) {
         try {
+            db.statement.executeUpdate("DELETE FROM answers WHERE question_id='" + id + "'");
             db.statement.executeUpdate("DELETE FROM questions WHERE id='" + id + "'");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -55,11 +57,8 @@ public class QuestionManagement {
             int id = Integer.parseInt(resultSet.getString("id"));
             questions.add(new Question(id,question));
         }
-        Question[] q= new Question[questions.size()];
-        for (int i=0;i< q.length;i++){
-            q[i]=questions.get(i);
-        }
-        return q;
+
+        return questions.toArray(new Question[questions.size()]);
     }
 
     // Returns a question based on the id informed by the parameter

@@ -1,4 +1,4 @@
-package com.github.ebassani.electionmachine;
+package com.github.ebassani.electionmachine.data.model;
 
 public class Question {
     int id;
