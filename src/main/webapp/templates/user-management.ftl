@@ -11,8 +11,11 @@
 </head>
 <body>
 
-<div class="edit-dialog" style="display: none">
+<div class="overlay" style="display: none"></div>
+
+<div class="dialog dialog--edit" style="display: none">
     <form method="post" action="/user-management">
+        <input type="hidden" name="action" value="edit">
         <input type="hidden" name="id" id="edit-id">
         <label for="edit-names">Names</label><input type="text" name="names" id="edit-names">
         <label for="edit-surnames">Surnames</label><input type="text" name="surnames" id="edit-surnames">
@@ -25,33 +28,50 @@
     </form>
 </div>
 
-<div class="delete-dialog" style="display: none">
-    <#--    U sure u wanna delete?-->
+<div class="dialog dialog--delete" style="display: none">
+    <span>Are you sure you want to delete <span id="delete-name"></span>?</span>
+    <form action="/user-management" method="post">
+        <input type="hidden" name="action" value="delete">
+        <input type="hidden" name="id" id="delete-id">
+        <input type="button" name="cancel" value="Cancel">
+        <input type="submit" name="confirm" value="Confirm">
+    </form>
 </div>
 
 <div class="create-dialog" style="display: none">
 
 </div>
 
-<#list users as user>
-    <div class="candidate" data-user-id="${user.id}" data-user-names="${user.names}"
-         data-user-surnames="${user.surnames}" data-user-admin="${user.admin?string("true", "false")}"
-         data-user-age="${user.age}" data-user-region="${user.region}">
-
-        <span>${user.names}</span>
-        <span>${user.surnames}</span>
-        <#if user.admin>
-            <span>Admin</span>
-        <#else>
-            <span>Candidate</span>
-        </#if>
-
-        <span>${user.age}</span>
-        <span>${user.region}</span>
-        <div class="button" onclick="editCandidate(${user.id})">Edit</div>
-        <div class="button">Delete</div>
+<div class="candidates">
+    <div class="header">
+        <span>Names</span>
+        <span>Usernames</span>
+        <span>Account Type</span>
+        <span>Email</span>
+        <span>Age</span>
+        <span>Region</span>
     </div>
-</#list>
+    <#list users as user>
+        <div class="candidate" data-user-id="${user.id}" data-user-names="${user.names}"
+             data-user-surnames="${user.surnames}" data-user-admin="${user.admin?string("true", "false")}"
+             data-user-age="${user.age}" data-user-region="${user.region}">
+
+            <span>${user.names}</span>
+            <span>${user.surnames}</span>
+            <#if user.admin>
+                <span>Admin</span>
+            <#else>
+                <span>Candidate</span>
+            </#if>
+
+            <span>${user.email}</span>
+            <span>${user.age}</span>
+            <span>${user.region}</span>
+            <div class="button button__edit" onclick="editCandidate(${user.id})">Edit</div>
+            <div class="button button__delete" onclick="deleteCandidate(${user.id})">Delete</div>
+        </div>
+    </#list>
+</div>
 
 <script src="../js/user-management.js"></script>
 </body>
