@@ -2,6 +2,7 @@ function getQuestion(id,question) {
     document.getElementById("question").value = question
     document.getElementById("q_id").value = id
     toVisible("edit")
+
 }
 
 function delQuestion(id) {
@@ -11,8 +12,10 @@ function delQuestion(id) {
 
 function toHidden(id){
     document.getElementById(id).classList.add("hidden")
+    document.getElementById("overlay").classList.add("hidden")
 }
 
 function toVisible(id){
     document.getElementById(id).classList.remove("hidden")
+    document.getElementById("overlay").classList.remove("hidden")
 }
