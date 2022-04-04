@@ -49,4 +49,16 @@ public class UserDao {
                 "age='" + newUser.getAge() + "' " +
                 "WHERE id='" + id + "'");
     }
+
+    public static void addUser(User user) throws SQLException {
+        db.statement.executeQuery("INSERT INTO users (email, password_hash, is_admin, is_candidate, names, surnames, region, age) VALUES(" +
+                "email='" + user.getEmail() +"'," +
+                "password_hash='"+user.getPasswordHash()+"',"+
+                "is_admin='" + (user.isAdmin() ? "1" : "0") + "'," +
+                "is_candidate='" + (user.isCandidate() ? "1" : "0") + "'," +
+                "names='" + user.getNames() + "'," +
+                "surnames='" + user.getSurnames() + "'," +
+                "region='" + user.getRegion() + "'," +
+                "age='" + user.getAge() + "' )");
+    }
 }
