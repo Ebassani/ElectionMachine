@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 
 import static j2html.TagCreator.*;
 
@@ -87,7 +88,7 @@ public class Quizz extends HttpServlet {
                 "    <input type=\"number\" name=\"age\" value=\"Your age\" required min=\"18\" max=\"110\">\n" +
                 "    <label for=\"region\" class=\"age-region-text\">Choose a Region:</label>\n" +
                 "    <select name=\"region\" id=\"region\" required>\n" +
-                "        <option value=\"Ahvenamaa\">Ahvenamaa</option>\n" +
+                "        <option value=\"Ahvenanmaa\">Ahvenanmaa</option>\n" +
                 "        <option value=\"Etelä-Karjala\">Etelä-Karjala</option>\n" +
                 "        <option value=\"Etelä-Pohjanmaa\">Etelä-Pohjanmaa</option>\n" +
                 "        <option value=\"Kainuu\">Kainuu</option>\n" +
@@ -123,6 +124,7 @@ public class Quizz extends HttpServlet {
         anon.setRegion(req.getParameter("region"));
         anon.setAge(Integer.parseInt(req.getParameter("age")));
 
+        System.out.println(req.getParameter("region"));
 
         try {
             int id = UserDao.addUser(anon);
