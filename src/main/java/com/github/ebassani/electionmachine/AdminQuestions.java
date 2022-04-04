@@ -30,6 +30,7 @@ public class AdminQuestions extends HttpServlet {
                 "    <meta charset=\"UTF-8\">" +
                 "    <title>AddQuestion</title>" +
                 "    <link rel=\"stylesheet\" href=\"/style/question-management.css\">" +
+                "    <script src=\"/js/question-management.js\"></script>" +
                 "</head>" +
                 "<body>");
 
@@ -50,6 +51,8 @@ public class AdminQuestions extends HttpServlet {
                 h1("Questions")
         ).render());
 
+        out.print("<button onclick=\"toVisible('create')\">Add question</button>");
+
         out.print("<div>");
         for (int i=0;i<questions.length;i++){
             out.print("<div name=\"question "+i+" \">");
@@ -61,12 +64,13 @@ public class AdminQuestions extends HttpServlet {
         }
         out.print("</div>");
 
-        out.print("<div id='popup' class=\"popup hidden\">"+
+        out.print("<div id='edit' class=\"popup hidden\">"+
                 "<form method='post' action='/questionHandler'>" +
                 "<input type=\"hidden\" id='q_id' name='id' value=''>"+
                 "<input type=\"text\" id='question' name='question' " +
                 "placeholder='Your question here' value=''>" +
-                "<input type=\"submit\">"+
+                "<input type=\"submit\">" +
+                "<button onclick=\"toHidden('edit')\" type='button'>Cancel</button>"+
                 "</form>"+
                 "</div>");
 
@@ -75,32 +79,20 @@ public class AdminQuestions extends HttpServlet {
                 "<form method='post' action='/questionHandler'>" +
                 "<input type=\"hidden\" id='id' name='id' value=''>"+
                 "<input type=\"submit\" value='YES'>" +
-                "<button type='button'>NO</button>"+
+                "<button onclick=\"toHidden('delete')\" type='button'>NO</button>"+
                 "</form>"+
                 "</div>");
 
-        out.print("<div id=\"delete\" class=\"popup hidden\">" +
+        out.print("<div id=\"create\" class=\"popup hidden\">" +
                 "<h3>Write the new question here:</h3>"+
                 "<form method='post' action='/questionHandler'>" +
                 "<input type=\"text\" name='question'>"+
                 "<input type=\"submit\">" +
+                "<button onclick=\"toHidden('create')\" type='button'>Cancel</button>" +
                 "</form>"+
                 "</div>");
 
         out.print("</body>" +
-                "<script>" +
-
-                "function getQuestion(id,question) {" +
-                "    document.getElementById(\"question\").value = question;" +
-                "    document.getElementById(\"q_id\").value = id" +
-                "};" +
-
-                "function delQuestion(id) {" +
-                "document.getElementById(\"id\").value = id" +
-                "" +
-                "}" +
-
-                "</script>" +
                 "</html>");
     }
 }
