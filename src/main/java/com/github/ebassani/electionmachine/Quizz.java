@@ -1,9 +1,14 @@
 package com.github.ebassani.electionmachine;
 
+import com.github.ebassani.electionmachine.data.Database;
 import com.github.ebassani.electionmachine.data.QuestionDao;
+import com.github.ebassani.electionmachine.data.UserDao;
+import com.github.ebassani.electionmachine.data.model.Answer;
 import com.github.ebassani.electionmachine.data.model.Question;
+import com.github.ebassani.electionmachine.data.model.User;
 import j2html.tags.specialized.TbodyTag;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import java.io.PrintWriter;
@@ -11,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 
 import static j2html.TagCreator.*;
 
@@ -19,6 +25,10 @@ import static j2html.TagCreator.*;
         urlPatterns = {"/quizz"}
 )
 public class Quizz extends HttpServlet {
+
+    Database db = Database.getInstance();
+
+    public Quizz() throws Exception {}
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -43,42 +53,94 @@ public class Quizz extends HttpServlet {
                 "<body>\n" +
                 "<form method=\"post\" action=\"/quizz\">\n" + "<div class=\"question\">\n");
 
-        int n = 0;
-
         try{
+            assert var != null;
             Question[] array = var.getQuestions();
-            for (int i=0;i<array.length;i++) {
+            for (Question question : array) {
 
-              String q = array[i].getQuestion();
+                String q = question.getQuestion();
+                int n = question.getId();
 
 
-               out.print(
-                       "    <div class=\"statement\" name=\"statement\">"+q+"</div>\n" +
-                       "    <div class=\"decision\">\n" +
-                       "        <div class=\"agree\">Agree</div>\n" +
-                       "        <div class=\"options\">\n" +
-                       "            <div class=\"option-agree\"> <input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "            <div class=\"option-agree\"> <input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "            <div class=\"option-agree\"> <input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "            <div class=\"neutral\"><input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "            <div class=\"option-disagree\"><input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "            <div class=\"option-disagree\"><input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "            <div class=\"option-disagree\"><input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "        </div>\n" +
-                       "        <div class=\"disagree\">Disagree</div>\n" +
-                       "    </div>");
-               n++;
+                out.print(
+                        "    <div class=\"statement\" name=\"statement\">" + q + "</div>\n" +
+                                "    <div class=\"decision\">\n" +
+                                "        <div class=\"agree\">Agree</div>\n" +
+                                "        <div class=\"options\">\n" +
+                                "            <div class=\"option-agree\"> <input type=\"radio\" required value=\"0\" name=\"choice" + n + "\"></div>\n" +
+                                "            <div class=\"option-agree\"> <input type=\"radio\" required value=\"1\" name=\"choice" + n + "\"></div>\n" +
+                                "            <div class=\"option-agree\"> <input type=\"radio\" required value=\"2\" name=\"choice" + n + "\"></div>\n" +
+                                "            <div class=\"neutral\"><input type=\"radio\" required value=\"3\" name=\"choice" + n + "\"></div>\n" +
+                                "            <div class=\"option-disagree\"><input type=\"radio\" required value=\"4\" name=\"choice" + n + "\"></div>\n" +
+                                "            <div class=\"option-disagree\"><input type=\"radio\" required value=\"5\" name=\"choice" + n + "\"></div>\n" +
+                                "            <div class=\"option-disagree\"><input type=\"radio\" required value=\"6\" name=\"choice" + n + "\"></div>\n" +
+                                "        </div>\n" +
+                                "        <div class=\"disagree\">Disagree</div>\n" +
+                                "    </div>");
             }
 
         }catch (SQLException e) {
             e.printStackTrace();
         }
 
-        out.print("<input type=\"submit\" value=\"Submit\" class=\"submit-button\">\n" +
+        out.print("    <div class=\"age-region\">\n" +
+                "        <label class=\"age-region-text\">Insert your Age</label>\n" +
+                "    <input type=\"number\" name=\"age\" value=\"Your age\" required min=\"18\" max=\"110\">\n" +
+                "    <label for=\"region\" class=\"age-region-text\">Choose a Region:</label>\n" +
+                "    <select name=\"region\" id=\"region\" required>\n" +
+                "        <option value=\"Ahvenanmaa\">Ahvenanmaa</option>\n" +
+                "        <option value=\"Etelä-Karjala\">Etelä-Karjala</option>\n" +
+                "        <option value=\"Etelä-Pohjanmaa\">Etelä-Pohjanmaa</option>\n" +
+                "        <option value=\"Kainuu\">Kainuu</option>\n" +
+                "        <option value=\"Kanta-Häme\">Kanta-Häme</option>\n" +
+                "        <option value=\"Keski-Pohjanmaa\">Keski-Pohjanmaa</option>\n" +
+                "        <option value=\"Keski-Suomi\">Keski-Suomi</option>\n" +
+                "        <option value=\"Kymenlaakso\">Kymenlaakso</option>\n" +
+                "        <option value=\"Lappi\">Lappi</option>\n" +
+                "        <option value=\"Päijät-Häme\">Päijät-Häme</option>\n" +
+                "        <option value=\"Pirkanmaa\">Pirkanmaa</option>\n" +
+                "        <option value=\"Pohjanmaa\">Pohjanmaa</option>\n" +
+                "        <option value=\"Pohjois-Karjala\">Pohjois-Karjala</option>\n" +
+                "        <option value=\"Pohjois-Pohjanmaa\">Pohjois-Pohjanma</option>\n" +
+                "        <option value=\"Pohjois-Savo\">Pohjois-Savo</option>\n" +
+                "        <option value=\"Satakunta\">Satakunta</option>\n" +
+                "        <option value=\"Uusimaa\">Uusimaa</option>\n" +
+                "        <option value=\"Varsinais-Suomi\">Varsinais-Suomi</option>\n" +
+                "\n" +
+                "    </select>\n" +
+                "    </div>\n" +
+                "    <input type=\"submit\" value=\"Submit\" class=\"submit-button\">\n" +
                 "</div>\n" +
                 "\n" +
                 "</form>\n" +
                 "</body>\n" +
                 "</html>");
+
   }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        User anon = new User();
+        anon.setRegion(req.getParameter("region"));
+        anon.setAge(Integer.parseInt(req.getParameter("age")));
+
+        System.out.println(req.getParameter("region"));
+
+        try {
+            int id = UserDao.addUser(anon);
+            Answer answer = new Answer();
+            answer.setUserId(id);
+//            answer.setQuestionId(req.getParameter("region"));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+
+
+    }
 }

@@ -40,7 +40,8 @@ public class UserDao {
 
     public static void editUser(int id, User newUser) throws SQLException {
         db.statement.executeUpdate("UPDATE users " +
-                "SET is_admin='" + (newUser.isAdmin() ? "1" : "0") + "'," +
+                "SET email='" + newUser.getEmail() +"'," +
+                "is_admin='" + (newUser.isAdmin() ? "1" : "0") + "'," +
                 "is_candidate='" + (newUser.isCandidate() ? "1" : "0") + "'," +
                 "names='" + newUser.getNames() + "'," +
                 "surnames='" + newUser.getSurnames() + "'," +
@@ -49,7 +50,21 @@ public class UserDao {
                 "WHERE id='" + id + "'");
     }
 
-    public static void removeUser(int id) throws SQLException {
-        db.statement.executeUpdate("DELETE FROM users WHERE id='" + id + "'");
+    public static int addUser(User user) throws  SQLException {
+
+
+
+        db.statement.executeUpdate("INSERT INTO `users` (`email`, `password_hash`, `is_admin`, `is_candidate`, `names`, `surnames`, `region`, `age`) VALUES(" +
+                        "email='" + user.getEmail() +"'," +
+                        "password_hash='"+user.getPasswordHash()+"',"+
+                        "is_admin='" + (user.isAdmin() ? "1" : "0") + "'," +
+                        "is_candidate='" + (user.isCandidate() ? "1" : "0") + "'," +
+                        "names='" + user.getNames() + "'," +
+                        "surnames='" + user.getSurnames() + "'," +
+                        "'"+user.getRegion() + "'," +
+                        "age='" + user.getAge() + "' )");
+        ResultSet rs = db.statement.executeQuery("SELECT LAST_INSERT_ID();");
+        rs.next();
+        return rs.getInt(1);
     }
 }
