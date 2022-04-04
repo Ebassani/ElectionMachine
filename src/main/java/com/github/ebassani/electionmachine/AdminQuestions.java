@@ -54,24 +54,30 @@ public class AdminQuestions extends HttpServlet {
 
         out.print("<button onclick=\"toVisible('create')\">Add question</button>");
 
+
         out.print("<div>");
         for (int i = 0; i < questions.length; i++) {
-            out.print("<div name=\"question " + i + " \">");
+            out.print("<div class=\"questions\">");
             out.print(questions[i].getQuestion());
+            out.print("<div>");
             out.print("<button onclick=\"getQuestion" +
                     "('" + questions[i].getId() + "',\'" + questions[i].getQuestion() + "\')\">Edit</button>");
             out.print("<button onclick=\"delQuestion('" + questions[i].getId() + "')\">Delete</button>");
+            out.print("</div>");
             out.print("</div>");
         }
         out.print("</div>");
 
         out.print("<div id='edit' class=\"popup hidden\">" +
+                "<h3>Edit question</h3>" +
                 "<form method='post' action='/questionHandler'>" +
                 "<input type=\"hidden\" id='q_id' name='id' value=''>" +
-                "<input type=\"text\" id='question' name='question' " +
+                "<input type=\"text\" class=\"border\" id='question' name='question' " +
                 "placeholder='Your question here' value=''>" +
+                "<div>" +
                 "<input type=\"submit\">" +
                 "<button onclick=\"toHidden('edit')\" type='button'>Cancel</button>" +
+                "</div>" +
                 "</form>" +
                 "</div>");
 
@@ -87,9 +93,11 @@ public class AdminQuestions extends HttpServlet {
         out.print("<div id=\"create\" class=\"popup hidden\">" +
                 "<h3>Write the new question here:</h3>" +
                 "<form method='post' action='/questionHandler'>" +
-                "<input required type=\"text\" name='question'>" +
+                "<input class=\"border\" required type=\"text\" name='question'>" +
+                "<div>" +
                 "<input type=\"submit\">" +
                 "<button onclick=\"toHidden('create')\" type='button'>Cancel</button>" +
+                "</div>" +
                 "</form>" +
                 "</div>");
 
