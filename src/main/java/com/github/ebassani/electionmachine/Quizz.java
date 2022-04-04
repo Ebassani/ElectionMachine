@@ -1,6 +1,7 @@
 package com.github.ebassani.electionmachine;
-
-import j2html.tags.specialized.TbodyTag;
+import com.github.ebassani.electionmachine.data.Database;
+import com.github.ebassani.electionmachine.data.QuestionDao;
+import com.github.ebassani.electionmachine.data.model.Question;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import static j2html.TagCreator.*;
+
+
 
 @WebServlet(
         name = "Quizz",
@@ -18,14 +20,19 @@ import static j2html.TagCreator.*;
 )
 public class Quizz extends HttpServlet {
 
-    @Override
+    Database db = Database.getInstance();
+
+    public Quizz() throws Exception {}
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
-        QuestionManagement var = null;
+        QuestionDao var = null;
+
+
         try {
-            var = new QuestionManagement();
+            var = new  QuestionDao ();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -41,7 +48,7 @@ public class Quizz extends HttpServlet {
                 "<body>\n" +
                 "<form method=\"post\" action=\"/quizz\">\n" + "<div class=\"question\">\n");
 
-        int n = 0;
+        int n = 1;
 
         try{
             Question[] array = var.getQuestions();
@@ -55,28 +62,58 @@ public class Quizz extends HttpServlet {
                        "    <div class=\"decision\">\n" +
                        "        <div class=\"agree\">Agree</div>\n" +
                        "        <div class=\"options\">\n" +
-                       "            <div class=\"option-agree\"> <input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "            <div class=\"option-agree\"> <input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "            <div class=\"option-agree\"> <input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "            <div class=\"neutral\"><input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "            <div class=\"option-disagree\"><input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "            <div class=\"option-disagree\"><input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
-                       "            <div class=\"option-disagree\"><input type=\"radio\" name=\"choice"+n+"\"></div>\n" +
+                       "            <div class=\"option-agree\"> <input type=\"radio\" value=\"0\" name=\"choice"+n+"\"></div>\n" +
+                       "            <div class=\"option-agree\"> <input type=\"radio\" value=\"1\" name=\"choice"+n+"\"></div>\n" +
+                       "            <div class=\"option-agree\"> <input type=\"radio\" value=\"2\" name=\"choice"+n+"\"></div>\n" +
+                       "            <div class=\"neutral\"><input type=\"radio\" value=\"3\" name=\"choice"+n+"\"></div>\n" +
+                       "            <div class=\"option-disagree\"><input type=\"radio\" value=\"4\" name=\"choice"+n+"\"></div>\n" +
+                       "            <div class=\"option-disagree\"><input type=\"radio\" value=\"5\" name=\"choice"+n+"\"></div>\n" +
+                       "            <div class=\"option-disagree\"><input type=\"radio\" value=\"6\" name=\"choice"+n+"\"></div>\n" +
                        "        </div>\n" +
                        "        <div class=\"disagree\">Disagree</div>\n" +
                        "    </div>");
                n++;
             }
 
+
         }catch (SQLException e) {
             e.printStackTrace();
         }
 
-        out.print("<input type=\"submit\" value=\"Submit\" class=\"submit-button\">\n" +
+        out.print("<div class=\"age-region\">\n" +
+                "        <label class=\"age-region-text\">Insert your Age</label>\n" +
+                "    <input type=\"number\" value=\"Your age\" required min=\"18\" max=\"110\">\n" +
+                "    <label for=\"regions\" class=\"age-region-text\">Choose a Region:</label>\n" +
+                "    <select name=\"regions\" id=\"regions\" required>\n" +
+                "        <option value=\"Ahvenamaa\">Ahvenamaa</option>\n" +
+                "        <option value=\"Etelä-Karjala\">Etelä-Karjala</option>\n" +
+                "        <option value=\"Etelä-Pohjanmaa\">Etelä-Pohjanmaa</option>\n" +
+                "        <option value=\"Kainuu\">Kainuu</option>\n" +
+                "        <option value=\"Kanta-Häme\">Kanta-Häme</option>\n" +
+                "        <option value=\"Keski-Pohjanmaa\">Keski-Pohjanmaa</option>\n" +
+                "        <option value=\"Keski-Suomi\">Keski-Suomi</option>\n" +
+                "        <option value=\"Kymenlaakso\">Kymenlaakso</option>\n" +
+                "        <option value=\"Lappi\">Lappi</option>\n" +
+                "        <option value=\"Päijät-Häme\">Päijät-Häme</option>\n" +
+                "        <option value=\"Pirkanmaa\">Pirkanmaa</option>\n" +
+                "        <option value=\"Pohjanmaa\">Pohjanmaa</option>\n" +
+                "        <option value=\"Pohjois-Karjala\">Pohjois-Karjala</option>\n" +
+                "        <option value=\"Pohjois-Pohjanmaa\">Pohjois-Pohjanma</option>\n" +
+                "        <option value=\"Pohjois-Savo\">Pohjois-Savo</option>\n" +
+                "        <option value=\"Satakunta\">Satakunta</option>\n" +
+                "        <option value=\"Uusimaa\">Uusimaa</option>\n" +
+                "        <option value=\"Varsinais-Suomi\">Varsinais-Suomi</option>\n" +
+                "\n" +
+                "    </select>\n" +
+                "    </div>\n" +
+                "    <input type=\"submit\" value=\"Submit\" class=\"submit-button\">\n" +
                 "</div>\n" +
                 "\n" +
                 "</form>\n" +
                 "</body>\n" +
                 "</html>");
+
+
   }
+
 }
