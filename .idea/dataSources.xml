@@ -5,7 +5,7 @@
       <driver-ref>mariadb</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mariadb://djsushi.ddns.net:3306/election_machine</jdbc-url>
+      <jdbc-url>jdbc:mariadb://djsushi.ddns.net:80</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

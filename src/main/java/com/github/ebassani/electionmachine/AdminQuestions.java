@@ -29,6 +29,7 @@ public class AdminQuestions extends HttpServlet {
                 "<head>" +
                 "    <meta charset=\"UTF-8\">" +
                 "    <title>AddQuestion</title>" +
+                "    <link rel=\"stylesheet\" href=\"/style/question-management.css\">" +
                 "</head>" +
                 "<body>");
 
@@ -51,7 +52,7 @@ public class AdminQuestions extends HttpServlet {
 
         out.print("<div>");
         for (int i=0;i<questions.length;i++){
-            out.print("<div>");
+            out.print("<div name=\"question "+i+" \">");
             out.print(questions[i].getQuestion());
             out.print("<button onclick=\"getQuestion" +
                     "('"+questions[i].getId()+"',\'"+questions[i].getQuestion()+"\')\">Edit</button>");
@@ -96,6 +97,7 @@ public class AdminQuestions extends HttpServlet {
 
                 "function delQuestion(id) {" +
                 "document.getElementById(\"id\").value = id" +
+                "" +
                 "}" +
 
                 "</script>" +
