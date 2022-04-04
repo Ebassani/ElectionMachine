@@ -30,31 +30,21 @@ public class QuestionFormHandling extends HttpServlet {
             if (text == null) {
                 var.deleteQuestion(id);
                 response.getWriter().println("question deleted");
+                response.sendRedirect("/admquestion");
             } else {
                 var.updateQuestion(text, id);
                 response.getWriter().println("question updated");
+                response.sendRedirect("/admquestion");
             }
         } catch (Exception e) {
             if (text != null) {
                 var.createQuestion(text);
                 response.getWriter().println("question created");
+                response.sendRedirect("/admquestion");
             } else {
                 response.getWriter().println("Nothing happened");
             }
         }
 
-//        try {
-//            response.getWriter().println(var.getQuestionWithId(2).getQuestion());
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            Question[] array = var.getQuestions();
-//            for (int i=0;i<array.length;i++) {
-//                response.getWriter().println(array[i].getQuestion());
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
     }
 }
