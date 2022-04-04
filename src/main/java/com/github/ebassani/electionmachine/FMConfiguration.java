@@ -10,17 +10,17 @@ public class FMConfiguration {
 
     private static Configuration fmConfigInstance = null;
 
-    private FMConfiguration() throws IOException {
-        fmConfigInstance.setDirectoryForTemplateLoading(new File("templates/"));
-        fmConfigInstance.setDefaultEncoding("UTF-8");
-        fmConfigInstance.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
-        fmConfigInstance.setLogTemplateExceptions(false);
-        fmConfigInstance.setWrapUncheckedExceptions(true);
-        fmConfigInstance.setFallbackOnNullLoopVariable(false);
-    }
+    public static Configuration getInstance() throws IOException {
+        if (fmConfigInstance == null) {
+            fmConfigInstance = new Configuration(Configuration.VERSION_2_3_21);
+            fmConfigInstance.setDirectoryForTemplateLoading(new File("templates/"));
+            fmConfigInstance.setDefaultEncoding("UTF-8");
+            fmConfigInstance.setTemplateExceptionHandler(TemplateExceptionHandler.HTML_DEBUG_HANDLER);
+            fmConfigInstance.setLogTemplateExceptions(false);
+            fmConfigInstance.setWrapUncheckedExceptions(true);
+            fmConfigInstance.setFallbackOnNullLoopVariable(false);
+        }
 
-    public static Configuration getInstance() {
-        if (fmConfigInstance == null) fmConfigInstance = new Configuration(Configuration.VERSION_2_3_21);
         return fmConfigInstance;
     }
 

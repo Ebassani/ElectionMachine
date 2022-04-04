@@ -3,6 +3,22 @@ package com.github.ebassani.electionmachine.data.model;
 public class User {
 
     int id;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", isAdmin=" + isAdmin +
+                ", isCandidate=" + isCandidate +
+                ", names='" + names + '\'' +
+                ", surnames='" + surnames + '\'' +
+                ", region='" + region + '\'' +
+                ", age=" + age +
+                '}';
+    }
+
     String email;
     String passwordHash;
     boolean isAdmin;
@@ -10,7 +26,7 @@ public class User {
     String names;
     String surnames;
     String region;
-    String age;
+    int age;
 
     public int getId() {
         return id;
@@ -76,11 +92,11 @@ public class User {
         this.region = region;
     }
 
-    public String getAge() {
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 }

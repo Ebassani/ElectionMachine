@@ -1,5 +1,7 @@
 package com.github.ebassani.electionmachine;
 
+import com.github.ebassani.electionmachine.servlet.Login;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;

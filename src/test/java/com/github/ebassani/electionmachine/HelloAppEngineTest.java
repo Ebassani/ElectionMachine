@@ -1,5 +1,6 @@
 package com.github.ebassani.electionmachine;
 
+import com.github.ebassani.electionmachine.servlet.Login;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,0 +1,18 @@
+@import "reset";
+
+body {
+  height: max(500px, 100vh);
+}
+
+.edit-dialog {
+  position: fixed;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  z-index: 1;
+  inset: 0;
+  margin: auto;
+  height: fit-content;
+  width: min(90vw, 600px);
+  background-color: #ffffff;
+  padding: 20px;
+}
