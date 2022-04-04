@@ -13,15 +13,15 @@
 
 <div class="edit-dialog" style="display: none">
     <form method="post" action="/user-management">
-        <input type="hidden" name="user-id">
+        <input type="hidden" name="id" id="edit-id">
         <label for="edit-names">Names</label><input type="text" name="names" id="edit-names">
         <label for="edit-surnames">Surnames</label><input type="text" name="surnames" id="edit-surnames">
         <label for="edit-region">Region</label><input type="text" name="region" id="edit-region">
         <label for="edit-age">Age</label><input type="text" name="age" id="edit-age">
         <span>Candidate</span>
         <label for="edit-admin" hidden>Admin</label><input type="checkbox" name="admin" id="edit-admin">
-        <input type="submit" value="edit">
         <span>Admin</span>
+        <input type="submit" value="Save">
     </form>
 </div>
 
