@@ -215,13 +215,5 @@ a {
 .submit-button:active {
   border: none;
 }
-.age-region-text{
-  color: beige;
-  font-size: 1.5rem;
-}
-.age-region{
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 3%;
-}
+
 /*# sourceMappingURL=style.css.map */

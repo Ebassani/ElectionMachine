@@ -1,6 +1,7 @@
 package com.github.ebassani.electionmachine.data;
 
 import com.github.ebassani.electionmachine.data.model.Answer;
+import com.github.ebassani.electionmachine.data.model.Question;
 import com.github.ebassani.electionmachine.data.model.User;
 
 import java.sql.ResultSet;
@@ -41,5 +42,22 @@ public class AnswerDao {
 
     public static void addAnswer(Answer answer) throws SQLException {
         db.statement.executeUpdate("INSERT INTO answers(question_id, user_id, value) VALUE () ");
+    }
+
+
+    public static Answer[] getCandidateAnswers (int id) throws SQLException {
+
+        ResultSet resultSet = db.statement.executeQuery("SELECT * from answers where user_id="+id+"");
+
+        ArrayList<Answer> answers = new ArrayList<>();
+        while (resultSet.next()){
+            Answer answer= new Answer();
+            answer.setValue(Integer.parseInt(resultSet.getString("value")));
+            answer.setUserId(Integer.parseInt(resultSet.getString("user_id")));
+            answer.setQuestionId(Integer.parseInt(resultSet.getString("question_id")));
+            answers.add(answer);
+        }
+
+        return answers.toArray(new Answer[answers.size()]);
     }
 }
