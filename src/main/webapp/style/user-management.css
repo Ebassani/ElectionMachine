@@ -5,13 +5,9 @@
   font-family: "Roboto", sans-serif;
 }
 
-a {
-  text-decoration: none;
-}
-
 .header {
   height: 50px;
-  background-color: #444444;
+  background-color: #555555;
   display: flex;
   justify-content: space-between;
   grid-template-columns: 1fr 1fr;
@@ -22,27 +18,12 @@ a {
   height: 100%;
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
 .header .left {
   height: 100%;
   display: flex;
   align-items: center;
-}
-
-.header h1 {
-  color: snow;
-}
-
-.header .nav-element {
-  font-size: 1.2rem;
-  transition: color 0.2s;
-  color: #ffffff;
-}
-
-.header .nav-element:hover {
-  color: #bbbbbb;
 }
 
 .overlay {
@@ -93,7 +74,7 @@ body {
 
 .dialog--edit > form {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1.5fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
   grid-template-columns: auto 1fr;
   gap: 10px;
 }
@@ -108,7 +89,7 @@ body {
 
 .dialog--create > form {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
   grid-template-columns: auto 1fr;
   gap: 10px;
 }
