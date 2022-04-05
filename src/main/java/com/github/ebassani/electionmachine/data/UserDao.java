@@ -50,15 +50,17 @@ public class UserDao {
     }
 
     public static int addUser(User user) throws  SQLException {
-        db.statement.executeUpdate("INSERT INTO `users` (`email`, `password_hash`, `is_admin`, `is_candidate`, `names`, `surnames`, `region`, `age`) VALUES(" +
-                        "email='" + user.getEmail() +"'," +
-                        "password_hash='"+user.getPasswordHash()+"',"+
-                        "is_admin='" + (user.isAdmin() ? "1" : "0") + "'," +
-                        "is_candidate='" + (user.isCandidate() ? "1" : "0") + "'," +
-                        "names='" + user.getNames() + "'," +
-                        "surnames='" + user.getSurnames() + "'," +
-                        "'"+user.getRegion() + "'," +
-                        "age='" + user.getAge() + "' )");
+        db.statement.executeUpdate(
+                "INSERT INTO `users` (`email`, `password_hash`, `is_admin`, `is_candidate`, `names`, `surnames`, " +
+                        "`region`, `age`) VALUES (" +
+                        "'" + user.getEmail() +"'," +
+                        "'" + user.getPasswordHash() + "',"+
+                        "'" + (user.isAdmin() ? "1" : "0") + "'," +
+                        "'" + (user.isCandidate() ? "1" : "0") + "'," +
+                        "'" + user.getNames() + "'," +
+                        "'" + user.getSurnames() + "'," +
+                        "'" + user.getRegion() + "'," +
+                        "'" + user.getAge() + "')");
         ResultSet rs = db.statement.executeQuery("SELECT LAST_INSERT_ID();");
         rs.next();
         return rs.getInt(1);

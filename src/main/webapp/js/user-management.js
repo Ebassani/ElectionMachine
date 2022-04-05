@@ -1,6 +1,7 @@
 let overlay = document.querySelector(".overlay")
 let editDialog = document.querySelector(".dialog--edit")
 let deleteDialog = document.querySelector(".dialog--delete")
+let createDialog = document.querySelector(".dialog--create")
 
 function editCandidate(id) {
     console.log(`clicked id ${id}`)
@@ -34,8 +35,15 @@ function deleteCandidate(id) {
     })
 }
 
+function createCandidate() {
+    console.log(`creating candidate`)
+    createDialog.style.display = ""
+    overlay.style.display = ""
+}
+
 function cancelModals() {
     overlay.style.display = "none"
     editDialog.style.display = "none"
     deleteDialog.style.display = "none"
+    createDialog.style.display = "none"
 }

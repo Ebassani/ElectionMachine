@@ -1,6 +1,10 @@
+a {
+  text-decoration: none;
+}
+
 .header {
   height: 50px;
-  background-color: #555555;
+  background-color: #444444;
   display: flex;
   justify-content: space-between;
   grid-template-columns: 1fr 1fr;
@@ -11,12 +15,27 @@
   height: 100%;
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 .header .left {
   height: 100%;
   display: flex;
   align-items: center;
+}
+
+.header h1 {
+  color: snow;
+}
+
+.header .nav-element {
+  font-size: 1.2rem;
+  transition: color 0.2s;
+  color: #ffffff;
+}
+
+.header .nav-element:hover {
+  color: #bbbbbb;
 }
 
 .overlay {

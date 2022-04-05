@@ -44,18 +44,43 @@
     </form>
 </div>
 
-<div class="create-dialog" style="display: none">
-
+<div class="dialog dialog--create" style="display: none">
+    <form method="post" action="/user-management">
+        <input type="hidden" name="action" value="create">
+        <label for="create-email">Email:</label><input type="email" name="email" id="create-email" required>
+        <label for="create-password">Password:</label><input type="password" name="password" id="create-password"
+                                                             required>
+        <label for="create-names">Names:</label><input type="text" name="names" id="create-names" required>
+        <label for="create-surnames">Surnames:</label><input type="text" name="surnames" id="create-surnames" required>
+        <label for="create-region">Region:</label><select name="region" id="create-region">
+            <#list regions as region>
+                <option value="${region.region}">${region.region}</option>
+            </#list>
+        </select>
+        <label for="create-age">Age:</label><input type="text" name="age" id="create-age" required>
+        <label for="create-admin">Admin</label>
+        <input id="create-admin" name="admin" type="radio" value="true" required>
+        <label for="create-candidate">Candidate</label>
+        <input id="create-candidate" name="admin" type="radio" value="false" checked required>
+        <input type="submit" value="Create user">
+    </form>
 </div>
 
 <div class="header">
-    <div class="left"></div>
-    <div class="right"></div>
+    <div class="left">
+        <a href="/user-management"><h1>Users</h1></a>
+    </div>
+    <div class="right">
+        <a class="nav-element" href="/admQuestions.jsp">Questions</a>
+        <a class="nav-element" href="/logout">Logout</a>
+        <div class="button" onclick="createCandidate()">Create user</div>
+    </div>
 </div>
 
 <div class="candidates">
     <#list users as user>
-        <div class="candidate <#if user.admin>admin</#if>" data-user-id="${user.id}" data-user-names="${user.names}"
+        <div class="candidate <#if user.admin>admin<#else>candidate</#if>" data-user-id="${user.id}"
+             data-user-names="${user.names}"
              data-user-surnames="${user.surnames}" data-user-admin="${user.admin?string("true", "false")}"
              data-user-age="${user.age}" data-user-region="${user.region}">
 
