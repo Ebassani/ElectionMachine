@@ -216,4 +216,11 @@ a {
   border: none;
 }
 
+.age-region {
+  display: flex;
+  flex-direction: column;
+  color: beige;
+  margin-bottom: 3%;
+}
+
 /*# sourceMappingURL=style.css.map */
