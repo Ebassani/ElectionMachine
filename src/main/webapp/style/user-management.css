@@ -59,6 +59,10 @@
   background-color: hsl(0deg, 60%, 55%);
 }
 
+.hidden {
+  display: none !important;
+}
+
 body {
   height: max(500px, 100vh);
 }
