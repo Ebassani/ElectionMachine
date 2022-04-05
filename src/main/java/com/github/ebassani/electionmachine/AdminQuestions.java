@@ -42,6 +42,22 @@ public class AdminQuestions extends HttpServlet {
 
         }
 
+
+        if (request.getSession().getAttribute("user_id") != null){
+            int uId= (int) request.getSession().getAttribute("user_id");
+            out.println("Hello");
+            boolean isAdmin;
+            try {
+                isAdmin=Util.isAdmin(uId);
+                out.println(isAdmin);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            response.sendRedirect("/login");
+        }
+
         Question[] questions = null;
         try {
             questions = qm.getQuestions();
