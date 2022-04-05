@@ -20,9 +20,10 @@
 
 <div class="header">
     <div class="left">
-        <h1>Questions</h1>
+        <a href=""><h1 style="color: snow">Questions</h1></a>
     </div>
     <div class="right">
+        <a href="/user-management">Go to Users page</a>
         <button class="button" onclick="toVisible('create')">Add question</button>
     </div>
 </div>
@@ -62,9 +63,7 @@
         for (int i = 0; i < questions.length; i++) {
     %>
     <div class="questions">
-        <%
-            out.print(questions[i].getQuestion());
-        %>
+        <p class="text"><%out.print(questions[i].getQuestion());%></p>
         <div>
             <button class="button" onclick="getQuestion('<%out.print(questions[i].getId());%>','<%out.print(questions[i].getQuestion());%>')">
                 Edit
@@ -102,7 +101,7 @@
         <input class="border" required type="text" name='question'>
         <div>
             <input class="button" type="submit">
-            <button onclick="toHidden('create')" type='button'>Cancel</button>
+            <button class="button" onclick="toHidden('create')" type='button'>Cancel</button>
         </div>
     </form>
 </div>
