@@ -66,6 +66,7 @@ public class UserDao {
     }
 
     public static void removeUser(int id) throws SQLException {
+        db.statement.executeUpdate("DELETE FROM answers WHERE user_id='" + id + "'");
         db.statement.executeUpdate("DELETE FROM users WHERE id='" + id + "'");
     }
 }
