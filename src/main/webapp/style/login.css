@@ -87,31 +87,38 @@ a {
   display: none !important;
 }
 
-.popup {
-  display: flex;
-  flex-direction: column;
+body {
+  height: max(600px, 100vh);
+  background-image: url("../images/background1.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
-.questions {
-  display: flex;
-  flex-direction: column;
-  margin: 1em;
-  padding: 1em;
+.wrapper {
+  position: absolute;
+  width: min(90vw, 400px);
+  height: fit-content;
+  inset: 0;
+  margin: auto;
+  box-shadow: 5px 5px 15px 7px #000;
   border-radius: 5px;
-  box-shadow: 5px 5px 15px 1px #555555;
+  padding: 1em;
+  background-color: #dddddd;
 }
 
-.border {
-  margin-top: 1em;
-  border-left: 0;
-  border-right: 0;
-  border-top: 0;
-  margin-bottom: 1em;
+input {
   width: 100%;
 }
 
-.text {
-  margin-bottom: 0.5em;
+.wrapper > form {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1.5fr;
+  gap: 10px;
 }
 
-/*# sourceMappingURL=question-management.css.map */
+.wrapper span {
+  color: #e80000;
+}
+
+/*# sourceMappingURL=login.css.map */

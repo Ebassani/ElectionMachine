@@ -35,7 +35,7 @@ public class Login extends HttpServlet {
         resp.setCharacterEncoding("UTF-8");
 
         if (req.getSession().getAttribute("user_id") != null) {
-            resp.sendRedirect("index.html");
+            resp.sendRedirect("/index.html");
         }
 
         Template tmp = cfg.getTemplate("login.ftl");

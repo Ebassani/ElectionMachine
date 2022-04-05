@@ -1,44 +1,28 @@
-.hidden{
-  display: none !important;
-}
+@import "reset";
+@import "common";
 
 .popup{
-  position: fixed;
-  border: 1px solid #000000;
-  border-radius: 5px;
-  z-index: 5;
-  inset: 0;
-  margin: auto;
-  height: fit-content;
-  width: min(90vw, 600px);
-  background-color: #ffffff;
-  padding: 20px;
   display: flex;
   flex-direction: column;
-}
-
-.page-overlay {
-  position: fixed;
-  z-index: 3;
-  background-color: rgba(23, 23, 23, 0.7);
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
 }
 
 .questions{
   display: flex;
   flex-direction: column;
   margin: 1em;
-  border: 1px solid black;
   padding: 1em;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px 1px #555555;
 }
 
 .border{
+  margin-top: 1em;
   border-left: 0;
   border-right: 0;
   border-top: 0;
   margin-bottom: 1em;
   width: 100%;
+}
+.text{
+  margin-bottom: 0.5em;
 }
