@@ -1,44 +1,18 @@
 @import "reset";
+@import "common";
 
 body {
   height: max(500px, 100vh);
 }
 
-.header {
-  height: 50px;
-  background-color: #555555;
-}
-
-.overlay {
-  position: fixed;
-  z-index: 1;
-  background-color: rgba(23, 23, 23, 0.7);
-  inset: 0;
-  height: 100vh;
-  width: 100vw;
-}
-
-.dialog {
-  position: fixed;
-  border: 1px solid #000000;
-  border-radius: 5px;
-  z-index: 2;
-  inset: 0;
-  margin: auto;
-  height: fit-content;
-  width: min(90vw, 600px);
-  background-color: #ffffff;
-  padding: 20px;
-}
-
-.dialog--edit {
-
+.header .button {
+  width: fit-content;
 }
 
 .dialog--edit > form {
   display: grid;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
   gap: 10px;
 }
 
@@ -50,15 +24,26 @@ body {
   grid-column: 1 / 3;
 }
 
-.dialog--delete {
+.dialog--create > form {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+}
 
+.dialog--create input {
+  width: 100%;
+}
+
+.dialog--create input[type=submit] {
+  grid-column: 1 / 3;
 }
 
 .candidates {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 1.5rem;
 
   padding: min(5vw, 20px);
 }
@@ -83,14 +68,3 @@ body {
   gap: 10px;
 }
 
-.button {
-  padding: 8px;
-  cursor: pointer;
-  transition: background-color 0.4s;
-  border-radius: 5px;
-  background-color: hsl(0, 100%, 72%);
-}
-
-.button:hover {
-  background-color: hsl(0, 60%, 55%);
-}
