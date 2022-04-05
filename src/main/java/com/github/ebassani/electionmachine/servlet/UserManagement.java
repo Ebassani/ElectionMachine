@@ -2,6 +2,7 @@ package com.github.ebassani.electionmachine.servlet;
 
 import com.github.ebassani.electionmachine.FMConfiguration;
 import com.github.ebassani.electionmachine.data.Database;
+import com.github.ebassani.electionmachine.data.RegionDao;
 import com.github.ebassani.electionmachine.data.UserDao;
 import com.github.ebassani.electionmachine.data.model.User;
 import freemarker.template.Configuration;
@@ -41,6 +42,7 @@ public class UserManagement extends HttpServlet {
         try {
             Map<String, Object> root = new HashMap<>();
             root.put("users", UserDao.getUsers().stream().filter(user -> user.getEmail() != null).collect(Collectors.toList()));
+            root.put("regions", RegionDao.getRegions());
             tmp.process(root, resp.getWriter());
         } catch (Exception e) {
             e.printStackTrace();

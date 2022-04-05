@@ -1,3 +1,4 @@
+<#-- @ftlvariable name="regions" type="java.util.List<com.github.ebassani.electionmachine.data.model.Region>" -->
 <#-- @ftlvariable name="users" type="java.util.List<com.github.ebassani.electionmachine.data.model.User>" -->
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +20,11 @@
         <input type="hidden" name="id" id="edit-id">
         <label for="edit-names">Names</label><input type="text" name="names" id="edit-names">
         <label for="edit-surnames">Surnames</label><input type="text" name="surnames" id="edit-surnames">
-        <label for="edit-region">Region</label><input type="text" name="region" id="edit-region">
+        <label for="edit-region"></label><select name="region" id="edit-region">
+            <#list regions as region>
+                <option value="${region.region}">${region.region}</option>
+            </#list>
+        </select>
         <label for="edit-age">Age</label><input type="text" name="age" id="edit-age">
         <span>Candidate</span>
         <label for="edit-admin" hidden>Admin</label><input type="checkbox" name="admin" id="edit-admin">
