@@ -24,7 +24,7 @@
     </div>
     <div class="right">
         <a class="nav-element" href="/user-management">Users</a>
-        <a class="nav-element" href="">Log Out</a>
+        <a class="nav-element" href="/logout">Log Out</a>
         <button class="button" onclick="toVisible('create')">Add question</button>
     </div>
 </div>
