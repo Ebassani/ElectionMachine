@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-ear" name="election-machine-intellij:ear exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/election_machine_intellij_ear_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="election-machine-intellij/javaeeApplication/javaEEApplication" />
+      <element id="directory" name="web.war">
+        <element id="artifact" artifact-name="election-machine-intellij:war exploded" />
+      </element>
+      <element id="directory" name="lib">
+        <element id="library" level="project" name="Maven: com.google.appengine:appengine-api-1.0-sdk:Release" />
+        <element id="library" level="project" name="Maven: com.googlecode.objectify:objectify:5.1.22" />
+        <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+        <element id="library" level="application" name="freemarker" />
+      </element>
+    </root>
+  </artifact>
+</component>
