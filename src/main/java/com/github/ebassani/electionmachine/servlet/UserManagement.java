@@ -59,8 +59,8 @@ public class UserManagement extends HttpServlet {
 
                 user.setNames(request.getParameter("names"));
                 user.setSurnames(request.getParameter("surnames"));
-                user.setAdmin(Objects.equals(request.getParameter("admin"), "on"));
-                user.setCandidate(Objects.equals(request.getParameter("admin"), "off"));
+                user.setAdmin(Objects.equals(request.getParameter("admin"), "true"));
+                user.setCandidate(Objects.equals(request.getParameter("admin"), "false"));
                 user.setAge(Integer.parseInt(request.getParameter("age")));
                 user.setRegion(request.getParameter("region"));
 

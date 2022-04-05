@@ -13,6 +13,7 @@ function editCandidate(id) {
             document.querySelector("#edit-names").value = candidate.dataset.userNames
             document.querySelector("#edit-surnames").value = candidate.dataset.userSurnames
             document.querySelector("#edit-admin").checked = candidate.dataset.userAdmin === "true"
+            document.querySelector("#edit-candidate").checked = candidate.dataset.userAdmin !== "true"
             document.querySelector("#edit-age").value = candidate.dataset.userAge
             document.querySelector("#edit-region").value = candidate.dataset.userRegion
         }

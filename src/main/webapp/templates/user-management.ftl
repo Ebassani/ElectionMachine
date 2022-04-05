@@ -18,17 +18,18 @@
     <form method="post" action="/user-management">
         <input type="hidden" name="action" value="edit">
         <input type="hidden" name="id" id="edit-id">
-        <label for="edit-names">Names</label><input type="text" name="names" id="edit-names">
-        <label for="edit-surnames">Surnames</label><input type="text" name="surnames" id="edit-surnames">
-        <label for="edit-region"></label><select name="region" id="edit-region">
+        <label for="edit-names">Names:</label><input type="text" name="names" id="edit-names">
+        <label for="edit-surnames">Surnames:</label><input type="text" name="surnames" id="edit-surnames">
+        <label for="edit-region">Region:</label><select name="region" id="edit-region">
             <#list regions as region>
                 <option value="${region.region}">${region.region}</option>
             </#list>
         </select>
-        <label for="edit-age">Age</label><input type="text" name="age" id="edit-age">
-        <span>Candidate</span>
-        <label for="edit-admin" hidden>Admin</label><input type="checkbox" name="admin" id="edit-admin">
-        <span>Admin</span>
+        <label for="edit-age">Age:</label><input type="text" name="age" id="edit-age">
+        <label for="edit-admin">Admin</label>
+        <input id="edit-admin" name="admin" type="radio" value="true" checked>
+        <label for="edit-candidate">Candidate</label>
+        <input id="edit-candidate" name="admin" type="radio" value="false">
         <input type="submit" value="Save">
     </form>
 </div>
@@ -38,7 +39,7 @@
     <form action="/user-management" method="post">
         <input type="hidden" name="action" value="delete">
         <input type="hidden" name="id" id="delete-id">
-        <input type="button" name="cancel" value="Cancel">
+        <input type="button" name="cancel" value="Cancel" onclick="cancelModals()">
         <input type="submit" name="confirm" value="Confirm">
     </form>
 </div>
@@ -47,9 +48,14 @@
 
 </div>
 
+<div class="header">
+    <div class="left"></div>
+    <div class="right"></div>
+</div>
+
 <div class="candidates">
     <#list users as user>
-        <div class="candidate" data-user-id="${user.id}" data-user-names="${user.names}"
+        <div class="candidate <#if user.admin>admin</#if>" data-user-id="${user.id}" data-user-names="${user.names}"
              data-user-surnames="${user.surnames}" data-user-admin="${user.admin?string("true", "false")}"
              data-user-age="${user.age}" data-user-region="${user.region}">
 
@@ -63,8 +69,10 @@
             <span>E-mail: ${user.email}</span>
             <span>Age: ${user.age}</span>
             <span>Region: ${user.region}</span>
-            <div class="button button__edit" onclick="editCandidate(${user.id})">Edit</div>
-            <div class="button button__delete" onclick="deleteCandidate(${user.id})">Delete</div>
+            <div class="buttons">
+                <div class="button button__edit" onclick="editCandidate(${user.id})">Edit</div>
+                <div class="button button__delete" onclick="deleteCandidate(${user.id})">Delete</div>
+            </div>
         </div>
     </#list>
 </div>

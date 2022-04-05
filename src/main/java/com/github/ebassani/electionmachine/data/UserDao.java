@@ -40,8 +40,7 @@ public class UserDao {
 
     public static void editUser(int id, User newUser) throws SQLException {
         db.statement.executeUpdate("UPDATE users " +
-                "SET email='" + newUser.getEmail() +"'," +
-                "is_admin='" + (newUser.isAdmin() ? "1" : "0") + "'," +
+                "SET is_admin='" + (newUser.isAdmin() ? "1" : "0") + "'," +
                 "is_candidate='" + (newUser.isCandidate() ? "1" : "0") + "'," +
                 "names='" + newUser.getNames() + "'," +
                 "surnames='" + newUser.getSurnames() + "'," +
