@@ -40,6 +40,9 @@ public class AnswerDao {
     }
 
     public static void addAnswer(Answer answer) throws SQLException {
-        db.statement.executeUpdate("INSERT INTO answers(question_id, user_id, value) VALUE () ");
+        db.statement.executeUpdate("INSERT INTO answers(question_id, user_id, value) VALUE (" +
+                "'" + answer.getQuestionId() + "'," +
+                "'" + answer.getUserId() + "'," +
+                "'" + answer.getValue() + "') ");
     }
 }
