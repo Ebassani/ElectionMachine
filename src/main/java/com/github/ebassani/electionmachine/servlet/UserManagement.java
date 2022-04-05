@@ -1,6 +1,7 @@
 package com.github.ebassani.electionmachine.servlet;
 
 import com.github.ebassani.electionmachine.FMConfiguration;
+import com.github.ebassani.electionmachine.Util;
 import com.github.ebassani.electionmachine.data.Database;
 import com.github.ebassani.electionmachine.data.RegionDao;
 import com.github.ebassani.electionmachine.data.UserDao;
@@ -33,6 +34,20 @@ public class UserManagement extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        // if not logged in as admin, redirect to quiz
+        if (req.getSession().getAttribute("user_id") != null) {
+            int userId = (int) req.getSession().getAttribute("user_id");
+            boolean isAdmin;
+            try {
+                isAdmin = Util.isAdmin(userId);
+                if (!isAdmin) {
+                    resp.sendRedirect("/index.html");
+                }
+            } catch (SQLException ignored) {}
+        } else {
+            resp.sendRedirect("/login");
+        }
+
         // Show the candidates page
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
@@ -51,6 +66,7 @@ public class UserManagement extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
         String action = request.getParameter("action");
         if (Objects.equals(action, "edit")) {
             int id = Integer.parseInt(request.getParameter("id"));

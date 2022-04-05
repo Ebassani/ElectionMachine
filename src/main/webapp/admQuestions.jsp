@@ -43,7 +43,7 @@
         try {
             isAdmin = Util.isAdmin(uId);
             if (!isAdmin) {
-                response.sendRedirect("/login");
+                response.sendRedirect("/index.html");
             }
         } catch (SQLException e) {
         }
