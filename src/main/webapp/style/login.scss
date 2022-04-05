@@ -1,0 +1,36 @@
+@import "reset";
+@import "common";
+
+body {
+  height: max(600px, 100vh);
+  background-image: url("../images/background1.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.wrapper {
+  position: absolute;
+  width: min(90vw, 400px);
+  height: fit-content;
+  inset: 0;
+  margin: auto;
+  box-shadow: 5px 5px 15px 7px #000;
+  border-radius: 5px;
+  padding: 1em;
+  background-color: #dddddd;
+}
+
+input {
+  width: 100%;
+}
+
+.wrapper > form {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1.5fr;
+  gap: 10px;
+}
+
+.wrapper span {
+  color: #e80000;
+}
