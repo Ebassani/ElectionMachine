@@ -8,17 +8,62 @@ body {
   height: max(500px, 100vh);
 }
 
-.edit-dialog {
+.overlay {
+  position: fixed;
+  z-index: 1;
+  background-color: rgba(23, 23, 23, 0.7);
+  inset: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.dialog {
   position: fixed;
   border: 1px solid #000000;
   border-radius: 5px;
-  z-index: 1;
+  z-index: 2;
   inset: 0;
   margin: auto;
   height: fit-content;
   width: min(90vw, 600px);
   background-color: #ffffff;
   padding: 20px;
+}
+
+.candidates {
+  display: grid;
+  grid-auto-rows: min-content;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+}
+
+.header > * {
+  white-space: nowrap;
+}
+
+.candidate {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  justify-content: center;
+  align-items: center;
+}
+
+.candidate > * {
+  white-space: nowrap;
+}
+
+.candidate > span {
+  padding: 8px;
+  border: 1px solid #999999;
+}
+
+.button {
+  padding: 8px;
+  cursor: pointer;
+  background-color: hsl(0deg, 100%, 72%);
 }
 
 /*# sourceMappingURL=user-management.css.map */

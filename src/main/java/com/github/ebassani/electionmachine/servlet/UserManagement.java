@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @WebServlet(
         name = "UserManagement",
@@ -23,10 +24,10 @@ import java.util.Map;
 )
 public class UserManagement extends HttpServlet {
 
-    Database db = Database.getInstance();
     Configuration cfg = FMConfiguration.getInstance();
 
-    public UserManagement() throws Exception {}
+    public UserManagement() throws Exception {
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -47,36 +48,32 @@ public class UserManagement extends HttpServlet {
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // the post method edits users
+        String action = request.getParameter("action");
+        if (Objects.equals(action, "edit")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            try {
+                User user = new User();
 
-        // do the work
-        int id = Integer.parseInt(request.getParameter("id"));
-        try {
-            User user = new User();
+                user.setNames(request.getParameter("names"));
+                user.setSurnames(request.getParameter("surnames"));
+                user.setAdmin(Objects.equals(request.getParameter("admin"), "on"));
+                user.setCandidate(Objects.equals(request.getParameter("admin"), "off"));
+                user.setAge(Integer.parseInt(request.getParameter("age")));
+                user.setRegion(request.getParameter("region"));
 
-            user.setNames(request.getParameter("names"));
-            user.setSurnames(request.getParameter("surnames"));
-            user.setAdmin(Boolean.parseBoolean(request.getParameter("admin")));
-            user.setCandidate(!Boolean.parseBoolean(request.getParameter("admin")));
-            user.setAge(Integer.parseInt(request.getParameter("age")));
-            user.setRegion(request.getParameter("region"));
-
-            UserDao.editUser(id, user);
-        } catch (SQLException e) {
-            e.printStackTrace();
+                UserDao.editUser(id, user);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else if (Objects.equals(action, "delete")) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            try {
+                UserDao.removeUser(id);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
-
         // redirect back to the user management page
         response.sendRedirect("/user-management");
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // deletes candidates
-    }
-
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // creates candidates
     }
 }
