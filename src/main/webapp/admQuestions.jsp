@@ -20,9 +20,11 @@
 
 <div class="header">
     <div class="left">
-        <h1>Questions</h1>
+        <a href=""><h1 style="color: snow">Questions</h1></a>
     </div>
     <div class="right">
+        <a class="nav-element" href="/user-management">Users</a>
+        <a class="nav-element" href="">Logout</a>
         <button class="button" onclick="toVisible('create')">Add question</button>
     </div>
 </div>
@@ -62,9 +64,7 @@
         for (int i = 0; i < questions.length; i++) {
     %>
     <div class="questions">
-        <%
-            out.print(questions[i].getQuestion());
-        %>
+        <p class="text"><%out.print(questions[i].getQuestion());%></p>
         <div>
             <button class="button" onclick="getQuestion('<%out.print(questions[i].getId());%>','<%out.print(questions[i].getQuestion());%>')">
                 Edit
@@ -88,7 +88,7 @@
 </div>
 
 <div id="delete" class="dialog popup hidden">
-    <h3>Are you sure you want to delete this question?</h3>
+    <h3 style="margin-bottom: 1em">Are you sure you want to delete this question?</h3>
     <form method='post' action='/questionHandler'>
         <input type="hidden" id='id' name='id' value=''>
         <input class="button" type="submit" value='YES'>
@@ -102,7 +102,7 @@
         <input class="border" required type="text" name='question'>
         <div>
             <input class="button" type="submit">
-            <button onclick="toHidden('create')" type='button'>Cancel</button>
+            <button class="button" onclick="toHidden('create')" type='button'>Cancel</button>
         </div>
     </form>
 </div>
