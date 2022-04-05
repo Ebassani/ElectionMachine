@@ -23,7 +23,8 @@
         <a href=""><h1 style="color: snow">Questions</h1></a>
     </div>
     <div class="right">
-        <a href="/user-management">Go to Users page</a>
+        <a class="nav-element" href="/user-management">Users</a>
+        <a class="nav-element" href="">Logout</a>
         <button class="button" onclick="toVisible('create')">Add question</button>
     </div>
 </div>
@@ -87,7 +88,7 @@
 </div>
 
 <div id="delete" class="dialog popup hidden">
-    <h3>Are you sure you want to delete this question?</h3>
+    <h3 style="margin-bottom: 1em">Are you sure you want to delete this question?</h3>
     <form method='post' action='/questionHandler'>
         <input type="hidden" id='id' name='id' value=''>
         <input class="button" type="submit" value='YES'>
