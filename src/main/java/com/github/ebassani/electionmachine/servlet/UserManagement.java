@@ -75,6 +75,23 @@ public class UserManagement extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        } else if (Objects.equals(action, "create")) {
+            try {
+                User user = new User();
+
+                user.setEmail(request.getParameter("email"));
+                user.setPasswordHash(request.getParameter("password"));
+                user.setNames(request.getParameter("names"));
+                user.setSurnames(request.getParameter("surnames"));
+                user.setAdmin(Objects.equals(request.getParameter("admin"), "true"));
+                user.setCandidate(Objects.equals(request.getParameter("admin"), "false"));
+                user.setAge(Integer.parseInt(request.getParameter("age")));
+                user.setRegion(request.getParameter("region"));
+
+                UserDao.addUser(user);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         // redirect back to the user management page
         response.sendRedirect("/user-management");
