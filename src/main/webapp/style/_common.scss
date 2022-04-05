@@ -2,10 +2,6 @@ a {
   text-decoration: none;
 }
 
-button {
-  font-size: 1rem;
-}
-
 .header {
   min-height: 50px;
   background-color: #444444;
@@ -67,6 +63,7 @@ button {
 }
 
 .button {
+  font-size: 1rem;
   padding: 8px;
   cursor: pointer;
   transition: background-color 0.4s;

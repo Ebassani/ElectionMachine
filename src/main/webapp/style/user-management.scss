@@ -39,6 +39,12 @@ body {
   grid-column: 1 / 3;
 }
 
+.dialog--delete {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+}
+
 .candidates {
   display: flex;
   flex-wrap: wrap;

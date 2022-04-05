@@ -30,7 +30,7 @@
         <input id="edit-admin" name="admin" type="radio" value="true" checked>
         <label for="edit-candidate">Candidate</label>
         <input id="edit-candidate" name="admin" type="radio" value="false">
-        <input type="submit" value="Save">
+        <input class="button" type="submit" value="Save">
     </form>
 </div>
 
@@ -39,8 +39,8 @@
     <form action="/user-management" method="post">
         <input type="hidden" name="action" value="delete">
         <input type="hidden" name="id" id="delete-id">
-        <input type="button" name="cancel" value="Cancel" onclick="cancelModals()">
-        <input type="submit" name="confirm" value="Confirm">
+        <input class="button" type="button" name="cancel" value="Cancel" onclick="cancelModals()">
+        <input class="button" type="submit" name="confirm" value="Confirm">
     </form>
 </div>
 
@@ -62,7 +62,7 @@
         <input id="create-admin" name="admin" type="radio" value="true" required>
         <label for="create-candidate">Candidate</label>
         <input id="create-candidate" name="admin" type="radio" value="false" checked required>
-        <input type="submit" value="Create user">
+        <input class="button" type="submit" value="Create user">
     </form>
 </div>
 
