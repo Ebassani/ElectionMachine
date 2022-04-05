@@ -1,4 +1,6 @@
 let overlay = document.querySelector(".overlay")
+let editDialog = document.querySelector(".dialog--edit")
+let deleteDialog = document.querySelector(".dialog--delete")
 
 function editCandidate(id) {
     console.log(`clicked id ${id}`)
@@ -6,11 +8,12 @@ function editCandidate(id) {
         if (candidate.dataset.userId === id.toString()) {
             console.table(candidate)
             overlay.style.display = ""
-            document.querySelector(".dialog--edit").style.display = ""
+            editDialog.style.display = ""
             document.querySelector("#edit-id").value = candidate.dataset.userId
             document.querySelector("#edit-names").value = candidate.dataset.userNames
             document.querySelector("#edit-surnames").value = candidate.dataset.userSurnames
             document.querySelector("#edit-admin").checked = candidate.dataset.userAdmin === "true"
+            document.querySelector("#edit-candidate").checked = candidate.dataset.userAdmin !== "true"
             document.querySelector("#edit-age").value = candidate.dataset.userAge
             document.querySelector("#edit-region").value = candidate.dataset.userRegion
         }
@@ -23,10 +26,16 @@ function deleteCandidate(id) {
         if (candidate.dataset.userId === id.toString()) {
             console.table(candidate)
             overlay.style.display = ""
-            document.querySelector(".dialog--delete").style.display = ""
+            deleteDialog.style.display = ""
             document.querySelector("#delete-id").value = candidate.dataset.userId
             document.querySelector("#delete-name").innerHTML =
                 candidate.dataset.userNames + " " + candidate.dataset.userSurnames
         }
     })
+}
+
+function cancelModals() {
+    overlay.style.display = "none"
+    editDialog.style.display = "none"
+    deleteDialog.style.display = "none"
 }

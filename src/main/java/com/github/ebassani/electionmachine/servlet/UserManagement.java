@@ -2,6 +2,7 @@ package com.github.ebassani.electionmachine.servlet;
 
 import com.github.ebassani.electionmachine.FMConfiguration;
 import com.github.ebassani.electionmachine.data.Database;
+import com.github.ebassani.electionmachine.data.RegionDao;
 import com.github.ebassani.electionmachine.data.UserDao;
 import com.github.ebassani.electionmachine.data.model.User;
 import freemarker.template.Configuration;
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @WebServlet(
         name = "UserManagement",
@@ -39,7 +41,8 @@ public class UserManagement extends HttpServlet {
 
         try {
             Map<String, Object> root = new HashMap<>();
-            root.put("users", UserDao.getUsers());
+            root.put("users", UserDao.getUsers().stream().filter(user -> user.getEmail() != null).collect(Collectors.toList()));
+            root.put("regions", RegionDao.getRegions());
             tmp.process(root, resp.getWriter());
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,8 +59,8 @@ public class UserManagement extends HttpServlet {
 
                 user.setNames(request.getParameter("names"));
                 user.setSurnames(request.getParameter("surnames"));
-                user.setAdmin(Objects.equals(request.getParameter("admin"), "on"));
-                user.setCandidate(Objects.equals(request.getParameter("admin"), "off"));
+                user.setAdmin(Objects.equals(request.getParameter("admin"), "true"));
+                user.setCandidate(Objects.equals(request.getParameter("admin"), "false"));
                 user.setAge(Integer.parseInt(request.getParameter("age")));
                 user.setRegion(request.getParameter("region"));
 
