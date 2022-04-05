@@ -1,6 +1,7 @@
 @import "reset";
 
 body {
+  padding: min(5vw, 20px);
   height: max(500px, 100vh);
 }
 
@@ -35,34 +36,21 @@ body {
 }
 
 .candidates {
-  display: grid;
-  grid-auto-rows: min-content;
-}
-
-// the table header
-.header {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-}
-
-.header > * {
-  white-space: nowrap;
+  display: flex;
+  flex: 1 0 500px;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .candidate {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  justify-content: center;
-  align-items: center;
-}
-
-.candidate > * {
-  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  box-shadow: 1px 1px 15px 2px #000000;
 }
 
 .candidate > span {
-  padding: 8px;
-  border: 1px solid #999999;
+
 }
 
 .button {

@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @WebServlet(
         name = "UserManagement",
@@ -39,7 +40,7 @@ public class UserManagement extends HttpServlet {
 
         try {
             Map<String, Object> root = new HashMap<>();
-            root.put("users", UserDao.getUsers());
+            root.put("users", UserDao.getUsers().stream().filter(user -> user.getEmail() != null).collect(Collectors.toList()));
             tmp.process(root, resp.getWriter());
         } catch (Exception e) {
             e.printStackTrace();

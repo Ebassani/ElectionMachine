@@ -11,7 +11,7 @@
 </head>
 <body>
 
-<div class="overlay" style="display: none"></div>
+<div class="overlay" style="display: none" onclick="cancelModals()"></div>
 
 <div class="dialog dialog--edit" style="display: none">
     <form method="post" action="/user-management">
@@ -43,30 +43,21 @@
 </div>
 
 <div class="candidates">
-    <div class="header">
-        <span>Names</span>
-        <span>Usernames</span>
-        <span>Account Type</span>
-        <span>Email</span>
-        <span>Age</span>
-        <span>Region</span>
-    </div>
     <#list users as user>
         <div class="candidate" data-user-id="${user.id}" data-user-names="${user.names}"
              data-user-surnames="${user.surnames}" data-user-admin="${user.admin?string("true", "false")}"
              data-user-age="${user.age}" data-user-region="${user.region}">
 
-            <span>${user.names}</span>
-            <span>${user.surnames}</span>
+            <span>Names: ${user.names}</span>
+            <span>Surnames: ${user.surnames}</span>
             <#if user.admin>
-                <span>Admin</span>
+                <span>Role: Admin</span>
             <#else>
-                <span>Candidate</span>
+                <span>Role: Candidate</span>
             </#if>
-
-            <span>${user.email}</span>
-            <span>${user.age}</span>
-            <span>${user.region}</span>
+            <span>E-mail: ${user.email}</span>
+            <span>Age: ${user.age}</span>
+            <span>Region: ${user.region}</span>
             <div class="button button__edit" onclick="editCandidate(${user.id})">Edit</div>
             <div class="button button__delete" onclick="deleteCandidate(${user.id})">Delete</div>
         </div>

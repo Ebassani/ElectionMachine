@@ -51,9 +51,6 @@ public class UserDao {
     }
 
     public static int addUser(User user) throws  SQLException {
-
-
-
         db.statement.executeUpdate("INSERT INTO `users` (`email`, `password_hash`, `is_admin`, `is_candidate`, `names`, `surnames`, `region`, `age`) VALUES(" +
                         "email='" + user.getEmail() +"'," +
                         "password_hash='"+user.getPasswordHash()+"',"+
@@ -66,5 +63,9 @@ public class UserDao {
         ResultSet rs = db.statement.executeQuery("SELECT LAST_INSERT_ID();");
         rs.next();
         return rs.getInt(1);
+    }
+
+    public static void removeUser(int id) throws SQLException {
+        db.statement.executeUpdate("DELETE FROM users WHERE id='" + id + "'");
     }
 }
