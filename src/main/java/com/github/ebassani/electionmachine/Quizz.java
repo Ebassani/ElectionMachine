@@ -6,19 +6,15 @@ import com.github.ebassani.electionmachine.data.UserDao;
 import com.github.ebassani.electionmachine.data.model.Answer;
 import com.github.ebassani.electionmachine.data.model.Question;
 import com.github.ebassani.electionmachine.data.model.User;
-import j2html.tags.specialized.TbodyTag;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import java.io.PrintWriter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
-
-import static j2html.TagCreator.*;
 
 @WebServlet(
         name = "Quizz",

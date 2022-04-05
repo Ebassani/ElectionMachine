@@ -11,8 +11,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-import static j2html.TagCreator.*;
-
 @WebServlet(
         name = "AdmQuestions",
         urlPatterns = {"/admquestion"}
@@ -48,9 +46,7 @@ public class AdminQuestions extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        out.print(body(
-                h1("Questions")
-        ).render());
+        out.print("<h1>Questions</h1>");
 
         out.print("<button onclick=\"toVisible('create')\">Add question</button>");
 

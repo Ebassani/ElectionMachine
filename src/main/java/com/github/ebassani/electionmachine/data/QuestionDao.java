@@ -1,9 +1,9 @@
 package com.github.ebassani.electionmachine.data;
 
-import com.github.ebassani.electionmachine.data.Database;
 import com.github.ebassani.electionmachine.data.model.Question;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class QuestionDao {

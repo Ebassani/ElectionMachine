@@ -15,4 +15,9 @@ public class StartupListener implements ServletContextListener {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void contextDestroyed(ServletContextEvent servletContextEvent) {
+
+    }
 }

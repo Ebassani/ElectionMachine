@@ -1,13 +1,11 @@
 package com.github.ebassani.electionmachine.servlet;
 
 import com.github.ebassani.electionmachine.FMConfiguration;
-import com.github.ebassani.electionmachine.data.Database;
 import com.github.ebassani.electionmachine.data.UserDao;
 import com.github.ebassani.electionmachine.data.model.User;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

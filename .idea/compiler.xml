@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="election-machine" />
+        <module name="election-machine-intellij" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="election-machine" target="1.8" />
+      <module name="election-machine-intellij" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>
