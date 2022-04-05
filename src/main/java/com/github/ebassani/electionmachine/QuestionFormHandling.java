@@ -16,9 +16,9 @@ import java.io.IOException;
 public class QuestionFormHandling extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        QuestionDao var = null;
+        QuestionDao dao = null;
         try {
-            var = new QuestionDao();
+            dao = new QuestionDao();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -28,19 +28,19 @@ public class QuestionFormHandling extends HttpServlet {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             if (text == null) {
-                var.deleteQuestion(id);
+                dao.deleteQuestion(id);
                 response.getWriter().println("question deleted");
-                response.sendRedirect("/admquestion");
+                response.sendRedirect("/admQuestions.jsp");
             } else {
-                var.updateQuestion(text, id);
+                dao.updateQuestion(text, id);
                 response.getWriter().println("question updated");
-                response.sendRedirect("/admquestion");
+                response.sendRedirect("/admQuestions.jsp");
             }
         } catch (Exception e) {
             if (text != null) {
-                var.createQuestion(text);
+                dao.createQuestion(text);
                 response.getWriter().println("question created");
-                response.sendRedirect("/admquestion");
+                response.sendRedirect("/admQuestions.jsp");
             } else {
                 response.getWriter().println("Nothing happened");
             }

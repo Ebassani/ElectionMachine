@@ -1,14 +1,17 @@
 <%@
         page import="com.github.ebassani.electionmachine.data.QuestionDao,
                      com.github.ebassani.electionmachine.data.model.Question,
-                     java.sql.SQLException"
+                     java.sql.SQLException,
+                     com.github.ebassani.electionmachine.Util"
 %>
-<%@ page import="com.github.ebassani.electionmachine.Util" %>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Title</title>
     <link rel="stylesheet" href="/style/question-management.css">
     <script src="/js/question-management.js"></script>
@@ -55,7 +58,9 @@
             out.print(questions[i].getQuestion());
         %>
         <div>
-            <button onclick="getQuestion('<%out.print(questions[i].getId());%>','<%out.print(questions[i].getQuestion());%>')">Edit</button>
+            <button onclick="getQuestion('<%out.print(questions[i].getId());%>','<%out.print(questions[i].getQuestion());%>')">
+                Edit
+            </button>
             <button onclick="delQuestion('<%out.print(questions[i].getId());%>')">Delete</button>
         </div>
     </div>
@@ -65,9 +70,8 @@
 <div id="edit" class="popup hidden">
     <h3>Edit question</h3>
     <form method='post' action='/questionHandler'>
-        <input type="hidden\" id='q_id' name='id' value=''>
+        <input type="hidden" id='q_id' name='id' value=''>
         <input type="text" class="border" id='question' name='question' placeholder='Your question here' value=''>
-
         <div>
             <input type="submit">
             <button onclick="toHidden('edit')" type='button'>Cancel</button>
@@ -94,6 +98,8 @@
         </div>
     </form>
 </div>
+
+<div id="overlay" class="page-overlay hidden"></div>
 
 </body>
 </html>
