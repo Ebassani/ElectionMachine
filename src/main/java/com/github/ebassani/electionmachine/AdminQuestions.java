@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-import static j2html.TagCreator.*;
 
 @WebServlet(
         name = "AdmQuestions",
@@ -22,7 +21,6 @@ public class AdminQuestions extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("text/html");
-        response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
         out.print("<!DOCTYPE html>" +
@@ -45,13 +43,13 @@ public class AdminQuestions extends HttpServlet {
 
         if (request.getSession().getAttribute("user_id") != null){
             int uId= (int) request.getSession().getAttribute("user_id");
-            out.println("Hello");
             boolean isAdmin;
             try {
                 isAdmin=Util.isAdmin(uId);
-                out.println(isAdmin);
+                if (!isAdmin){
+                    response.sendRedirect("/login");
+                }
             } catch (SQLException e) {
-                e.printStackTrace();
             }
         }
         else {
@@ -64,9 +62,6 @@ public class AdminQuestions extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        out.print(body(
-                h1("Questions")
-        ).render());
 
         out.print("<button onclick=\"toVisible('create')\">Add question</button>");
 
