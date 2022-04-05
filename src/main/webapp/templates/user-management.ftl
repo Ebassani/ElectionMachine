@@ -72,7 +72,7 @@
     </div>
     <div class="right">
         <a class="nav-element" href="/admQuestions.jsp">Questions</a>
-        <a class="nav-element" href="/logout">Logout</a>
+        <a class="nav-element" href="/logout">Log out</a>
         <div class="button" onclick="createCandidate()">Create user</div>
     </div>
 </div>

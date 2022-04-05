@@ -3,10 +3,12 @@ a {
 }
 
 .header {
-  height: 50px;
+  min-height: 50px;
   background-color: #444444;
   display: flex;
+  gap: 10px;
   justify-content: space-between;
+  align-items: center;
   grid-template-columns: 1fr 1fr;
   padding: 0 0.5em;
 }
