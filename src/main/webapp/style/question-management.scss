@@ -1,0 +1,28 @@
+@import "reset";
+@import "common";
+
+.popup{
+  display: flex;
+  flex-direction: column;
+}
+
+.questions{
+  display: flex;
+  flex-direction: column;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px 1px #555555;
+}
+
+.border{
+  margin-top: 1em;
+  border-left: 0;
+  border-right: 0;
+  border-top: 0;
+  margin-bottom: 1em;
+  width: 100%;
+}
+.text{
+  margin-bottom: 0.5em;
+}

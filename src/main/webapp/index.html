@@ -2,31 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-    <title>Hello App Engine</title>
+    <link rel="stylesheet" href="style/style.css">
+    <title>Main Page</title>
   </head>
-
   <body>
-    <h1>Welcome! Convert anything!</h1>
-
-    <table>
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
-      </tr>
-      <tr>
-        <td><a href='/hello'>The hello</a></td>
-        <td><a href='/headers'>The headers</a></td>
-      </tr>
-    </table>
-    <form action="/conversion" method="post">
-      <label for="centimeters">Centimeters: </label><input type="number" name="centimeters" id="centimeters" step=".01">
-      <br/>
-      <label for="inches">Inches: </label><input type="number" name="inches" id="inches" step=".01">
-      <br/>
-      <label for="meters">Meters: </label><input type="number" name="meters" id="meters" step=".01">
-      <br/>
-      <label for="yards">Yards: </label><input type="number" name="yards" id="yards" step=".01">
-      <br/>
-      <input type="submit" value="Submit">
-    </form>
+    <div class="main">
+      <a href="/quizz" class="link-start"><div class="start">Start Quizz</div></a>
+      <div class="login"><a href="">Candidate Log In </a></div>
+    </div>
   </body>
 </html>

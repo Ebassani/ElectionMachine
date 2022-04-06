@@ -1,5 +1,7 @@
 package com.github.ebassani.electionmachine;
 
+import com.github.ebassani.electionmachine.servlet.Login;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -13,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * This mock class is created to enable basic unit testing of the
- * {@link HelloAppEngine} class. Only methods used in the unit test
+ * {@link Login} class. Only methods used in the unit test
  * have a non-trivial implementation.
  * 
  * Feel free to change this class or replace it using other ways for testing
