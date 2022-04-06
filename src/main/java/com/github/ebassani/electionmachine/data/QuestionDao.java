@@ -61,7 +61,11 @@ public class QuestionDao {
         return questions.toArray(new Question[questions.size()]);
     }
 
-    // Returns a question based on the id informed by the parameter
+    //
+
+    /**
+     * Returns a question based on the id informed by the parameter
+     */
     public Question getQuestionWithId(int id) throws SQLException {
         String question = "The question with id " + id + " does not exist!";
         ResultSet resultSet = db.statement.executeQuery("SELECT * from questions " +

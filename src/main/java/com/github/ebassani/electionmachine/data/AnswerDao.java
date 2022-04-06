@@ -20,25 +20,6 @@ public class AnswerDao {
         }
     }
 
-    public static List<User> getUsers() throws SQLException {
-        ResultSet rs = db.statement.executeQuery("SELECT * FROM users");
-        ArrayList<User> users = new ArrayList<>();
-        while (rs.next()) {
-            User user = new User();
-            user.setId(rs.getInt("id"));
-            user.setEmail(rs.getString("email"));
-            user.setPasswordHash(rs.getString("password_hash"));
-            user.setAdmin(rs.getBoolean("is_admin"));
-            user.setCandidate(rs.getBoolean("is_candidate"));
-            user.setNames(rs.getString("names"));
-            user.setSurnames(rs.getString("surnames"));
-            user.setRegion(rs.getString("region"));
-            user.setAge(rs.getInt("age"));
-            users.add(user);
-        }
-        return users;
-    }
-
     public static void addAnswer(Answer answer) throws SQLException {
         db.statement.executeUpdate("INSERT INTO answers(question_id, user_id, value) VALUE (" +
                 "'" + answer.getQuestionId() + "'," +
