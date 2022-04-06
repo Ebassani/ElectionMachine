@@ -2,9 +2,11 @@ package com.github.ebassani.electionmachine.data;
 
 import com.github.ebassani.electionmachine.data.Database;
 import com.github.ebassani.electionmachine.data.model.Question;
+import com.github.ebassani.electionmachine.data.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class QuestionDao {
 
@@ -22,6 +24,16 @@ public class QuestionDao {
     public void createQuestion(String text) {
         try {
             db.statement.executeUpdate("INSERT INTO questions(text) VALUES('" + text + "')");
+            Question[] questions= getQuestions();
+            int lQuestionId = questions[questions.length-1].getId();
+            List<User> users = UserDao.getUsers();
+            for (User u : users){
+                if (u.isCandidate()){
+                    int userId = u.getId();
+                    db.statement.executeUpdate("INSERT INTO answers(question_id, user_id, value) " +
+                            "VALUES('" + lQuestionId + "','"+ userId +"','"+ 4 +"') ");
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
