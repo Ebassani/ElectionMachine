@@ -13,7 +13,10 @@ import java.io.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @WebServlet(
@@ -116,48 +119,53 @@ public class Quizz extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User anon = new User();
-        anon.setRegion(req.getParameter("region"));
-        anon.setAge(Integer.parseInt(req.getParameter("age")));
-
-
-        QuestionDao var = null;
+        int id = 0;
         try {
-            var = new QuestionDao();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
-
-        Answer answer = new Answer();
-
-
-
-        try {
-            int id = UserDao.addUser(anon);
-            answer.setUserId(id);
-
-            assert var != null;
-            Question[] array = var.getQuestions();
-
-
-                for(int i = 0; i<= array.length ; i++){
-                    String value = req.getParameter("choice" + i);
-                    if(i >0 ){
-                       answer.setValue(Integer.parseInt(value));
-                       answer.setQuestionId(i);
-                       AnswerDao.addAnswer(answer);
-                    }
-
-                }
-
-
-
+            id = UserDao.addAnonUser(req.getParameter("region"), req.getParameter("age"));
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        Enumeration<String> tempParamNames = req.getParameterNames();
+        ArrayList<String> paramNames = new ArrayList<>();
+        while (tempParamNames.hasMoreElements()) {
+            paramNames.add(tempParamNames.nextElement());
+        }
+
+        List<Integer> choices = paramNames.stream()
+                .filter(param -> param.startsWith("choice"))
+                .map(param -> Integer.valueOf(param.substring(6))).collect(Collectors.toList());
+
+        for (int choice: choices) {
+            int value = Integer.parseInt(req.getParameter("choice" + choice));
+            Answer answer = new Answer();
+            answer.setValue(value);
+            answer.setUserId(id);
+            answer.setQuestionId(choice);
+            try {
+                AnswerDao.addAnswer(answer);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+
+//            answer.setUserId(id);
+//
+//            assert questionDao != null;
+//            Question[] array = questionDao.getQuestions();
+//
+//
+//                for(int i = 1; i<= array.length ; i++){
+//                    String value = req.getParameter("choice" + i);
+//
+//                       answer.setValue(Integer.parseInt(value));
+//                       answer.setQuestionId(i);
+//                       AnswerDao.addAnswer(answer);
+//
+//
+//                }
 
 
     }

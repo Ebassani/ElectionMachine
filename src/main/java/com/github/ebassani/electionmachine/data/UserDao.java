@@ -66,6 +66,23 @@ public class UserDao {
         return rs.getInt(1);
     }
 
+    public static int addAnonUser(String region, String age) throws  SQLException {
+        db.statement.executeUpdate(
+                "INSERT INTO `users` (`email`, `password_hash`, `is_admin`, `is_candidate`, `names`, `surnames`, " +
+                        "`region`, `age`) VALUES (" +
+                        "NULL," +
+                        "NULL,"+
+                        "'0'," +
+                        "'0'," +
+                        "NULL," +
+                        "NULL," +
+                        "'" + region + "'," +
+                        "'" + age + "')");
+        ResultSet rs = db.statement.executeQuery("SELECT LAST_INSERT_ID();");
+        rs.next();
+        return rs.getInt(1);
+    }
+
     public static void removeUser(int id) throws SQLException {
         db.statement.executeUpdate("DELETE FROM answers WHERE user_id='" + id + "'");
         db.statement.executeUpdate("DELETE FROM users WHERE id='" + id + "'");
