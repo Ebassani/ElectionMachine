@@ -96,7 +96,7 @@ public class UserManagement extends HttpServlet {
                 User user = new User();
 
                 user.setEmail(request.getParameter("email"));
-                user.setPasswordHash(request.getParameter("password"));
+                user.setPasswordHash(Util.hashPassword(request.getParameter("password")));
                 user.setNames(request.getParameter("names"));
                 user.setSurnames(request.getParameter("surnames"));
                 user.setAdmin(Objects.equals(request.getParameter("admin"), "true"));

@@ -1,6 +1,7 @@
 package com.github.ebassani.electionmachine.servlet;
 
 import com.github.ebassani.electionmachine.FMConfiguration;
+import com.github.ebassani.electionmachine.Util;
 import com.github.ebassani.electionmachine.data.Database;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -34,6 +35,8 @@ public class Login extends HttpServlet {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
 
+        System.out.println(Util.hashPassword("lol"));
+
         if (req.getSession().getAttribute("user_id") != null) {
             resp.sendRedirect("/index.html");
         }
@@ -57,22 +60,24 @@ public class Login extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         try {
+            String hashedPassword = Util.hashPassword(request.getParameter("password"));
             ResultSet rs = db.statement.executeQuery("SELECT COUNT(*) FROM users WHERE email='"
-                    + request.getParameter("email") + "' AND password_hash='"
-            + request.getParameter("password") + "'");
+                    + request.getParameter("email") + "' AND password_hash='" + hashedPassword + "'");
             rs.next();
             int matches = rs.getInt(1);
             if (matches == 1) {
                 // login
                 rs = db.statement.executeQuery("SELECT * FROM users WHERE email='"
                         + request.getParameter("email") + "' AND password_hash='"
-                        + request.getParameter("password") + "'");
+                        + hashedPassword + "'");
                 rs.next();
                 int userId = rs.getInt("id");
+                boolean userAdmin = rs.getBoolean("is_admin");
                 HttpSession session = request.getSession();
                 session.setAttribute("user_id", userId);
 
-                response.sendRedirect("index.html");
+                if (userAdmin) response.sendRedirect("/user-management");
+                else response.sendRedirect("index.html");
             } else {
                 // send back to login page
                 response.sendRedirect("/login?error=Incorrect username or password");
