@@ -93,6 +93,11 @@ public class UserManagement extends HttpServlet {
             }
         } else if (Objects.equals(action, "create")) {
             try {
+                if (UserDao.existsWithEmail(request.getParameter("email"))) {
+                    response.sendRedirect("/user-management");
+                    return;
+                }
+
                 User user = new User();
 
                 user.setEmail(request.getParameter("email"));

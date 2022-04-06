@@ -87,4 +87,11 @@ public class UserDao {
         db.statement.executeUpdate("DELETE FROM answers WHERE user_id='" + id + "'");
         db.statement.executeUpdate("DELETE FROM users WHERE id='" + id + "'");
     }
+
+    public static boolean existsWithEmail(String email) throws SQLException {
+        ResultSet rs = db.statement.executeQuery("SELECT COUNT(*) FROM users WHERE email='" + email + "'");
+        rs.next();
+        System.out.println(rs.getInt(1));
+        return rs.getInt(1) >= 1;
+    }
 }

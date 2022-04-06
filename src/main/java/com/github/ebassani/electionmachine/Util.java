@@ -44,8 +44,8 @@ public class Util {
         assert msgDgst != null;
         byte[] bytes = msgDgst.digest(password.getBytes(StandardCharsets.UTF_8));
         for (Byte b : bytes) {
-            System.out.println(Byte.toUnsignedInt(b));
-            System.out.println(Byte.toUnsignedInt(b) % chars.length);
+//            System.out.println(Byte.toUnsignedInt(b));
+//            System.out.println(Byte.toUnsignedInt(b) % chars.length);
             int result = Byte.toUnsignedInt(b) % chars.length;
             sb.append(chars[result]);
         }
