@@ -47,4 +47,19 @@ public class AnswerDao {
 
         return answers;
     }
+
+    public static int compareAnswers(List<Answer> uAnswers, List<Answer> cAnswers) {
+        int diff=0;
+
+        for (Answer answer : uAnswers){
+            for (Answer candAnswers : cAnswers){
+                if (answer.getQuestionId() == candAnswers.getQuestionId()){
+                    diff+=Math.abs(answer.getValue() - candAnswers.getValue());
+                    break;
+                }
+            }
+        }
+
+        return diff;
+    }
 }
