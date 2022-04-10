@@ -2,6 +2,7 @@ package com.github.ebassani.electionmachine;
 
 import com.github.ebassani.electionmachine.data.Database;
 
+import javax.servlet.http.HttpSession;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
