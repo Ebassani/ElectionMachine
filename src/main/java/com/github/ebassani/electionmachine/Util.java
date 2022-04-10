@@ -27,12 +27,9 @@ public class Util {
         statement.setInt(1, id);
         ResultSet rs = statement.executeQuery();
 
-        while (rs.next()) {
-            if (rs.getBoolean("is_admin")) {
-                return true;
-            }
-        }
-        return false;
+        rs.next();
+
+        return rs.getBoolean("is_admin");
     }
 
     public static String hashPassword(String password) {
