@@ -10,9 +10,7 @@
 </head>
 <body>
 <div class="main">
-    <a href="<c:url value="/quiz.jsp"/>" class="link-start">
-        <div class="start-button">Start Quiz</div>
-    </a>
+    <a href="<c:url value="/quiz.jsp"/>" class="link-start">Start Quiz</a>
     <div class="buttons">
         <%
             if (Util.isSomebodyloggedIn(request.getSession()) == null) {
