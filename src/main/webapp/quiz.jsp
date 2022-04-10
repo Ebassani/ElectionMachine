@@ -41,7 +41,6 @@
             </div>
             <div class="disagree">Disagree</div>
         </div>
-
         <%
                 }
 

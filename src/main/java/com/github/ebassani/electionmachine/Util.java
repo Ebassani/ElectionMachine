@@ -5,6 +5,7 @@ import com.github.ebassani.electionmachine.data.Database;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -22,7 +23,9 @@ public class Util {
 
 
     public static boolean isAdmin(int id) throws SQLException {
-        ResultSet rs = db.statement.executeQuery("SELECT * from users where id='" + id + "'");
+        PreparedStatement statement = db.conn.prepareStatement("SELECT * from users where id=?");
+        statement.setInt(1, id);
+        ResultSet rs = statement.executeQuery();
 
         while (rs.next()) {
             if (rs.getBoolean("is_admin")) {
