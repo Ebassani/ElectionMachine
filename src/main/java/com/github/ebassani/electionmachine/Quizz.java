@@ -5,10 +5,15 @@ import com.github.ebassani.electionmachine.data.UserDao;
 import com.github.ebassani.electionmachine.data.model.Answer;
 import com.github.ebassani.electionmachine.data.model.User;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -22,7 +27,7 @@ public class Quizz extends HttpServlet {
 
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 
         int id = 0;
 
@@ -65,7 +70,7 @@ public class Quizz extends HttpServlet {
         List<User> users = null;
 
         try {
-            users = UserDao.getUsers();
+            users = UserDao.getCandidates();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -78,8 +83,13 @@ public class Quizz extends HttpServlet {
                 e.printStackTrace();
             }
         }
-        users.sort((u1, u2) -> u2.getDiffSum() - u1.getDiffSum());
+        users.sort(Comparator.comparingInt(User::getDiffSum));
+        for (int i = 0;i<users.size() && i<5;i++){
+            System.out.println(users.get(i).getNames()+" "+ users.get(i).getDiffSum());
+        }
 
-
+//        req.setAttribute("array", users);
+//        RequestDispatcher dispatcher = req.getRequestDispatcher("/result.jsp");
+//        dispatcher.forward(req, resp);
     }
 }
