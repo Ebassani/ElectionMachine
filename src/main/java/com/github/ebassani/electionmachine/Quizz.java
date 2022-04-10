@@ -26,10 +26,15 @@ public class Quizz extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
 
         int id = 0;
-        try {
-            id = UserDao.addAnonUser(req.getParameter("region"), req.getParameter("age"));
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        if (req.getSession().getAttribute("user_id") != null) {
+            id = (int) req.getSession().getAttribute("user_id");
+        } else {
+            try {
+                id = UserDao.addAnonUser(req.getParameter("region"), req.getParameter("age"));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         Enumeration<String> tempParamNames = req.getParameterNames();
@@ -42,7 +47,7 @@ public class Quizz extends HttpServlet {
                 .filter(param -> param.startsWith("choice"))
                 .map(param -> Integer.valueOf(param.substring(6))).collect(Collectors.toList());
 
-        for (int choice: choices) {
+        for (int choice : choices) {
             int value = Integer.parseInt(req.getParameter("choice" + choice));
             Answer answer = new Answer();
             answer.setValue(value);
@@ -54,10 +59,5 @@ public class Quizz extends HttpServlet {
                 e.printStackTrace();
             }
         }
-
-
-
-
-
     }
 }
