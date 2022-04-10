@@ -41,7 +41,7 @@ public class UserManagement extends HttpServlet {
             try {
                 isAdmin = Util.isAdmin(userId);
                 if (!isAdmin) {
-                    resp.sendRedirect("/index.html");
+                    resp.sendRedirect("/index.jsp");
                 }
             } catch (SQLException ignored) {}
         } else {

@@ -38,8 +38,8 @@ public class Login extends HttpServlet {
 
         System.out.println(Util.hashPassword("lol"));
 
-        if (req.getSession().getAttribute("user_id") != null) {
-            resp.sendRedirect("/index.html");
+        if (Util.isSomebodyloggedIn(req.getSession()) != null) {
+            resp.sendRedirect("/index.jsp");
         }
 
         Template tmp = cfg.getTemplate("login.ftl");
@@ -83,7 +83,7 @@ public class Login extends HttpServlet {
                 session.setAttribute("user_id", userId);
 
                 if (userAdmin) response.sendRedirect("/user-management");
-                else response.sendRedirect("index.html");
+                else response.sendRedirect("index.jsp");
             } else {
                 // send back to login page
                 response.sendRedirect("/login?error=Incorrect username or password");
