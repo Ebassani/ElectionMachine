@@ -16,29 +16,22 @@ import java.io.IOException;
 public class QuestionFormHandling extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        QuestionDao dao = null;
-        try {
-            dao = new QuestionDao();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         String text = request.getParameter("question");
 
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             if (text == null) {
-                dao.deleteQuestion(id);
+                QuestionDao.deleteQuestion(id);
                 response.getWriter().println("question deleted");
                 response.sendRedirect("/admQuestions.jsp");
             } else {
-                dao.updateQuestion(text, id);
+                QuestionDao.updateQuestion(text, id);
                 response.getWriter().println("question updated");
                 response.sendRedirect("/admQuestions.jsp");
             }
         } catch (Exception e) {
             if (text != null) {
-                dao.createQuestion(text);
+                QuestionDao.createQuestion(text);
                 response.getWriter().println("question created");
                 response.sendRedirect("/admQuestions.jsp");
             } else {

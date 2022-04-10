@@ -1,27 +1,27 @@
 package com.github.ebassani.electionmachine.data;
 
-import com.github.ebassani.electionmachine.data.Database;
 import com.github.ebassani.electionmachine.data.model.Question;
 import com.github.ebassani.electionmachine.data.model.User;
 
-import java.sql.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionDao {
 
-    Database db = Database.getInstance();
+    static Database db;
 
-    public QuestionDao() throws Exception {
+    static {
         try {
-             Database.getInstance();
+            db = Database.getInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     // Function that creates a question, requires the text.
-    public void createQuestion(String text) {
+    public static void createQuestion(String text) {
         try {
             db.statement.executeUpdate("INSERT INTO questions(text) VALUES('" + text + "')");
             Question[] questions= getQuestions();
@@ -40,7 +40,7 @@ public class QuestionDao {
     }
 
     // Function that edits a question, changes the text on the question that has its ID informed
-    public void updateQuestion(String text, int id) {
+    public static void updateQuestion(String text, int id) {
         try {
             db.statement.executeUpdate("UPDATE questions SET text='" + text + "' WHERE id='" + id + "'");
         } catch (SQLException e) {
@@ -49,7 +49,7 @@ public class QuestionDao {
     }
 
     // Function that deletes the question of whose ID was put in the parameter
-    public void deleteQuestion(int id) {
+    public static void deleteQuestion(int id) {
         try {
             db.statement.executeUpdate("DELETE FROM answers WHERE question_id='" + id + "'");
             db.statement.executeUpdate("DELETE FROM questions WHERE id='" + id + "'");
@@ -59,7 +59,7 @@ public class QuestionDao {
     }
 
     // Function returns an array that contains all the questions that can be used to print questions
-    public Question[] getQuestions() throws SQLException {
+    public static Question[] getQuestions() throws SQLException {
 
         ResultSet resultSet = db.statement.executeQuery("SELECT * from questions");
 
@@ -70,7 +70,7 @@ public class QuestionDao {
             questions.add(new Question(id,question));
         }
 
-        return questions.toArray(new Question[questions.size()]);
+        return questions.toArray(new Question[0]);
     }
 
     //
@@ -78,7 +78,7 @@ public class QuestionDao {
     /**
      * Returns a question based on the id informed by the parameter
      */
-    public Question getQuestionWithId(int id) throws SQLException {
+    public static Question getQuestionWithId(int id) throws SQLException {
         String question = "The question with id " + id + " does not exist!";
         ResultSet resultSet = db.statement.executeQuery("SELECT * from questions " +
                 "where id='" + id + "'");
