@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 
@@ -73,7 +71,15 @@ public class Quizz extends HttpServlet {
         }
 
         for (User user : users) {
-
+            try {
+                int diff= AnswerDao.compareAnswers(answers,AnswerDao.getUserAnswers(user.getId()));
+                user.setDiffSum(diff);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
+        users.sort((u1, u2) -> u2.getDiffSum() - u1.getDiffSum());
+
+
     }
 }
