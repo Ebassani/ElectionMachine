@@ -1,3 +1,11 @@
 /classes/
 /target/
 /src/main/webapp/secrets.txt
+/src/main/webapp/style/login.css
+/src/main/webapp/style/login.css.map
+/src/main/webapp/style/question-management.css
+/src/main/webapp/style/question-management.css.map
+/src/main/webapp/style/style.css
+/src/main/webapp/style/style.css.map
+/src/main/webapp/style/user-management.css
+/src/main/webapp/style/user-management.css.map
