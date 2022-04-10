@@ -38,7 +38,7 @@
         try {
             isAdmin = Util.isAdmin(uId);
             if (!isAdmin) {
-                response.sendRedirect("/index.html");
+                response.sendRedirect("/index.jsp");
             }
         } catch (SQLException ignored) {}
     } else {
