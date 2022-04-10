@@ -30,4 +30,36 @@ public class AnswerDao {
         statement.setInt(3, answer.getValue());
         statement.executeUpdate();
     }
+
+    public static List<Answer> getUserAnswers(int id) throws SQLException {
+        ArrayList<Answer> answers = new ArrayList<>();
+
+        ResultSet rs = db.conn.createStatement().executeQuery("SELECT * FROM answers WHERE" +
+                " user_id ='" + id + "'");
+
+        while (rs.next()){
+            Answer answer = new Answer();
+            answer.setUserId(id);
+            answer.setQuestionId(rs.getInt("question_id"));
+            answer.setValue(rs.getInt("value"));
+            answers.add(answer);
+        }
+
+        return answers;
+    }
+
+    public static int compareAnswers(List<Answer> uAnswers, List<Answer> cAnswers) {
+        int diff=0;
+
+        for (Answer answer : uAnswers){
+            for (Answer candAnswers : cAnswers){
+                if (answer.getQuestionId() == candAnswers.getQuestionId()){
+                    diff+=Math.abs(answer.getValue() - candAnswers.getValue());
+                    break;
+                }
+            }
+        }
+
+        return diff;
+    }
 }

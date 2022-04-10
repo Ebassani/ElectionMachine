@@ -3,6 +3,7 @@ package com.github.ebassani.electionmachine.data.model;
 public class User {
 
     int id;
+    int diffSum=0;
 
     @Override
     public String toString() {
@@ -27,6 +28,12 @@ public class User {
     String surnames;
     String region;
     int age;
+
+    public int getDiffSum() { return diffSum; }
+
+    public void setDiffSum(int diff) {
+        this.diffSum = diff;
+    }
 
     public int getId() {
         return id;
