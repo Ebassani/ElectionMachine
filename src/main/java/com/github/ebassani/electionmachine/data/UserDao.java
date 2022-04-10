@@ -39,6 +39,25 @@ public class UserDao {
         return users;
     }
 
+    public static List<User> getCandidates() throws SQLException {
+        ResultSet rs = db.conn.createStatement().executeQuery("SELECT * FROM users WHERE is_candidate=1");
+        ArrayList<User> users = new ArrayList<>();
+        while (rs.next()) {
+            User user = new User();
+            user.setId(rs.getInt("id"));
+            user.setEmail(rs.getString("email"));
+            user.setPasswordHash(rs.getString("password_hash"));
+            user.setAdmin(rs.getBoolean("is_admin"));
+            user.setCandidate(rs.getBoolean("is_candidate"));
+            user.setNames(rs.getString("names"));
+            user.setSurnames(rs.getString("surnames"));
+            user.setRegion(rs.getString("region"));
+            user.setAge(rs.getInt("age"));
+            users.add(user);
+        }
+        return users;
+    }
+
     public static void editUser(int id, User newUser) throws SQLException {
         PreparedStatement statement = db.conn.prepareStatement(
                 "UPDATE users SET is_admin=?, is_candidate=?, names=?, surnames=?, region=?, age=? WHERE id=?"
