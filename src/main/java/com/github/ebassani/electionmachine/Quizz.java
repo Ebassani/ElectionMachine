@@ -72,7 +72,7 @@ public class Quizz extends HttpServlet {
             e.printStackTrace();
         }
 
-        if (users != null) {
+        for (User user : users) {
 
         }
     }

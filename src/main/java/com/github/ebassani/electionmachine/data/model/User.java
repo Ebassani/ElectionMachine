@@ -31,8 +31,8 @@ public class User {
 
     public int getDiffSum() { return diffSum; }
 
-    public void increaseDiff(int diff) {
-        this.diffSum += diff;
+    public void setDiffSum(int diff) {
+        this.diffSum = diff;
     }
 
     public int getId() {
