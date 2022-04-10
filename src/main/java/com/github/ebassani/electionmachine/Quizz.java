@@ -3,6 +3,7 @@ package com.github.ebassani.electionmachine;
 import com.github.ebassani.electionmachine.data.AnswerDao;
 import com.github.ebassani.electionmachine.data.UserDao;
 import com.github.ebassani.electionmachine.data.model.Answer;
+import com.github.ebassani.electionmachine.data.model.User;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,17 +48,29 @@ public class Quizz extends HttpServlet {
                 .filter(param -> param.startsWith("choice"))
                 .map(param -> Integer.valueOf(param.substring(6))).collect(Collectors.toList());
 
+        ArrayList<Answer> answers = new ArrayList<>();
+
         for (int choice : choices) {
             int value = Integer.parseInt(req.getParameter("choice" + choice));
             Answer answer = new Answer();
             answer.setValue(value);
             answer.setUserId(id);
             answer.setQuestionId(choice);
+            answers.add(answer);
             try {
                 AnswerDao.addAnswer(answer);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
+
+        List<User> users = null;
+
+        try {
+            users = UserDao.getUsers();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
