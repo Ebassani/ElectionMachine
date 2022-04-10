@@ -3,6 +3,7 @@ package com.github.ebassani.electionmachine.data;
 import com.github.ebassani.electionmachine.data.model.Question;
 import com.github.ebassani.electionmachine.data.model.User;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,15 +24,22 @@ public class QuestionDao {
     // Function that creates a question, requires the text.
     public static void createQuestion(String text) {
         try {
-            db.statement.executeUpdate("INSERT INTO questions(text) VALUES('" + text + "')");
+            PreparedStatement statement = db.conn.prepareStatement("INSERT INTO questions (text) VALUES (?)");
+            statement.setString(1, text);
+            statement.executeUpdate();
             Question[] questions= getQuestions();
             int lQuestionId = questions[questions.length-1].getId();
             List<User> users = UserDao.getUsers();
             for (User u : users){
                 if (u.isCandidate()){
                     int userId = u.getId();
-                    db.statement.executeUpdate("INSERT INTO answers(question_id, user_id, value) " +
-                            "VALUES('" + lQuestionId + "','"+ userId +"','"+ 4 +"') ");
+                    statement = db.conn.prepareStatement(
+                            "INSERT INTO answers(question_id, user_id, value) VALUES (?,?,?)"
+                    );
+                    statement.setInt(1, lQuestionId);
+                    statement.setInt(2, userId);
+                    statement.setInt(3, 4);
+                    statement.executeUpdate();
                 }
             }
         } catch (SQLException e) {
@@ -42,7 +50,10 @@ public class QuestionDao {
     // Function that edits a question, changes the text on the question that has its ID informed
     public static void updateQuestion(String text, int id) {
         try {
-            db.statement.executeUpdate("UPDATE questions SET text='" + text + "' WHERE id='" + id + "'");
+            PreparedStatement statement = db.conn.prepareStatement("UPDATE questions SET text=? WHERE id=?");
+            statement.setString(1, text);
+            statement.setInt(2, id);
+            statement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -51,8 +62,8 @@ public class QuestionDao {
     // Function that deletes the question of whose ID was put in the parameter
     public static void deleteQuestion(int id) {
         try {
-            db.statement.executeUpdate("DELETE FROM answers WHERE question_id='" + id + "'");
-            db.statement.executeUpdate("DELETE FROM questions WHERE id='" + id + "'");
+            db.conn.createStatement().executeUpdate("DELETE FROM answers WHERE question_id='" + id + "'");
+            db.conn.createStatement().executeUpdate("DELETE FROM questions WHERE id='" + id + "'");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -61,7 +72,7 @@ public class QuestionDao {
     // Function returns an array that contains all the questions that can be used to print questions
     public static Question[] getQuestions() throws SQLException {
 
-        ResultSet resultSet = db.statement.executeQuery("SELECT * from questions");
+        ResultSet resultSet = db.conn.createStatement().executeQuery("SELECT * FROM questions");
 
         ArrayList<Question> questions = new ArrayList<>();
         while (resultSet.next()){
@@ -80,12 +91,10 @@ public class QuestionDao {
      */
     public static Question getQuestionWithId(int id) throws SQLException {
         String question = "The question with id " + id + " does not exist!";
-        ResultSet resultSet = db.statement.executeQuery("SELECT * from questions " +
-                "where id='" + id + "'");
+        ResultSet resultSet = db.conn.createStatement().executeQuery("SELECT * FROM questions WHERE id='" + id + "'");
         while (resultSet.next()) {
             question = resultSet.getString("text");
         }
-
         return new Question(id, question);
     }
 }

@@ -21,7 +21,7 @@ public class RegionDao {
     }
 
     public static List<Region> getRegions() throws SQLException {
-        ResultSet rs = db.statement.executeQuery("SELECT * FROM regions");
+        ResultSet rs = db.conn.createStatement().executeQuery("SELECT * FROM regions");
         ArrayList<Region> regions = new ArrayList<>();
         while (rs.next()) {
             Region region = new Region();

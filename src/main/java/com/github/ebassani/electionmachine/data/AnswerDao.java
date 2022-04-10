@@ -3,6 +3,7 @@ package com.github.ebassani.electionmachine.data;
 import com.github.ebassani.electionmachine.data.model.Answer;
 import com.github.ebassani.electionmachine.data.model.User;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,9 +22,12 @@ public class AnswerDao {
     }
 
     public static void addAnswer(Answer answer) throws SQLException {
-        db.statement.executeUpdate("INSERT INTO answers(question_id, user_id, value) VALUE (" +
-                "'" + answer.getQuestionId() + "'," +
-                "'" + answer.getUserId() + "'," +
-                "'" + answer.getValue() + "') ");
+        PreparedStatement statement = db.conn.prepareStatement(
+                "INSERT INTO answers(question_id, user_id, value) VALUE (?,?,?)"
+        );
+        statement.setInt(1, answer.getQuestionId());
+        statement.setInt(2, answer.getUserId());
+        statement.setInt(3, answer.getValue());
+        statement.executeUpdate();
     }
 }

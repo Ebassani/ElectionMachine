@@ -9,7 +9,6 @@ public class Database {
 
     private static Database dbInstance = null;
     public Connection conn;
-    public Statement statement;
 
     private Database() throws Exception {
         Class.forName("com.mysql.cj.jdbc.Driver").getDeclaredConstructor().newInstance();
@@ -18,7 +17,6 @@ public class Database {
                 Constants.DB_USERNAME,
                 Constants.DB_PASSWORD
         );
-        statement = conn.createStatement();
     }
 
     public static Database getInstance() throws Exception {

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -61,15 +62,20 @@ public class Login extends HttpServlet {
 
         try {
             String hashedPassword = Util.hashPassword(request.getParameter("password"));
-            ResultSet rs = db.statement.executeQuery("SELECT COUNT(*) FROM users WHERE email='"
-                    + request.getParameter("email") + "' AND password_hash='" + hashedPassword + "'");
+            PreparedStatement statement = db.conn.prepareStatement(
+                    "SELECT COUNT(*) FROM users WHERE email=? AND password_hash=?"
+            );
+            statement.setString(1, request.getParameter("email"));
+            statement.setString(2, hashedPassword);
+            ResultSet rs = statement.executeQuery();
             rs.next();
             int matches = rs.getInt(1);
             if (matches == 1) {
                 // login
-                rs = db.statement.executeQuery("SELECT * FROM users WHERE email='"
-                        + request.getParameter("email") + "' AND password_hash='"
-                        + hashedPassword + "'");
+                statement = db.conn.prepareStatement("SELECT * FROM users WHERE email=? AND password_hash=?");
+                statement.setString(1, request.getParameter("email"));
+                statement.setString(2, hashedPassword);
+                rs = statement.executeQuery();
                 rs.next();
                 int userId = rs.getInt("id");
                 boolean userAdmin = rs.getBoolean("is_admin");
