@@ -1,3 +1,5 @@
+<%@ page import="com.github.ebassani.electionmachine.data.model.User" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +10,13 @@
     <title>Result</title>
 </head>
 <body>
+
+<%
+    List<User> candidates = (List<User>) request.getSession().getAttribute("array");
+    for (int i = 0;i<candidates.size() && i<5;i++){
+        out.println(candidates.get(i).getNames());
+    }
+%>
 
 </body>
 </html>
