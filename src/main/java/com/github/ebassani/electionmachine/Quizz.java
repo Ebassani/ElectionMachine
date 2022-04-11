@@ -51,7 +51,7 @@ public class Quizz extends HttpServlet {
                 .filter(param -> param.startsWith("choice"))
                 .map(param -> Integer.valueOf(param.substring(6))).collect(Collectors.toList());
 
-        ArrayList<Answer> answers = new ArrayList<>();
+
 
         for (int choice : choices) {
             int value = Integer.parseInt(req.getParameter("choice" + choice));
@@ -59,7 +59,6 @@ public class Quizz extends HttpServlet {
             answer.setValue(value);
             answer.setUserId(id);
             answer.setQuestionId(choice);
-            answers.add(answer);
             try {
                 AnswerDao.addAnswer(answer);
             } catch (SQLException e) {
@@ -67,29 +66,7 @@ public class Quizz extends HttpServlet {
             }
         }
 
-        List<User> users = null;
+        resp.sendRedirect("/result.jsp");
 
-        try {
-            users = UserDao.getCandidates();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        for (User user : users) {
-            try {
-                int diff= AnswerDao.compareAnswers(answers,AnswerDao.getUserAnswers(user.getId()));
-                user.setDiffSum(diff);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        users.sort(Comparator.comparingInt(User::getDiffSum));
-        for (int i = 0;i<users.size() && i<5;i++){
-            System.out.println(users.get(i).getNames()+" "+ users.get(i).getDiffSum());
-        }
-
-//        req.setAttribute("array", users);
-//        RequestDispatcher dispatcher = req.getRequestDispatcher("/result.jsp");
-//        dispatcher.forward(req, resp);
     }
 }

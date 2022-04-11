@@ -1,5 +1,11 @@
 <%@ page import="com.github.ebassani.electionmachine.data.model.User" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.github.ebassani.electionmachine.data.model.Answer" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.github.ebassani.electionmachine.data.AnswerDao" %>
+<%@ page import="com.github.ebassani.electionmachine.data.UserDao" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.util.Comparator" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,11 +16,29 @@
     <title>Result</title>
 </head>
 <body>
-
 <%
-    List<User> candidates = (List<User>) request.getSession().getAttribute("array");
-    for (int i = 0;i<candidates.size() && i<5;i++){
-        out.println(candidates.get(i).getNames());
+    List<Answer> answers = AnswerDao.getUserAnswers((int) request.getSession().getAttribute("user_id"));
+
+    List<User> users = null;
+
+    try {
+        users = UserDao.getCandidates();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    for (User user : users) {
+        try {
+            int diff= AnswerDao.compareAnswers(answers,AnswerDao.getUserAnswers(user.getId()));
+            user.setDiffSum(diff);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    users.sort(Comparator.comparingInt(User::getDiffSum));
+
+    for (int i=0;i<5 && i<users.size();i++){
+        out.println(users.get(i));
     }
 %>
 
