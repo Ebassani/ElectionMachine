@@ -1,7 +1,6 @@
 package com.github.ebassani.electionmachine.data;
 
 import com.github.ebassani.electionmachine.data.model.Answer;
-import com.github.ebassani.electionmachine.data.model.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

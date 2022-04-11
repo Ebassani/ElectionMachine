@@ -4,7 +4,7 @@
 <%@ page import="com.github.ebassani.electionmachine.data.UserDao" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.util.*" %>
-<%@ page import="com.github.ebassani.electionmachine.Util" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
