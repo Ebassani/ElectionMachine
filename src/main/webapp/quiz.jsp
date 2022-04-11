@@ -54,7 +54,7 @@
             <input type="number" name="age" value="Your age" required min="18" max="110">
             <label for="region" class="age-region-text">Choose a Region:</label>
             <select name="region" id="region" required>
-                <option value="Ahvenamaa">Ahvenamaa</option>
+                <option value="Ahvenanmaa">Ahvenanmaa</option>
                 <option value="Etelä-Karjala">Etelä-Karjala</option>
                 <option value="Etelä-Pohjanmaa">Etelä-Pohjanmaa</option>
                 <option value="Kainuu">Kainuu</option>

@@ -49,17 +49,16 @@ public class AnswerDao {
     }
 
     public static int compareAnswers(List<Answer> uAnswers, List<Answer> cAnswers) {
-        int diff=0;
+        float diff=0;
 
         for (Answer answer : uAnswers){
             for (Answer candAnswers : cAnswers){
                 if (answer.getQuestionId() == candAnswers.getQuestionId()){
-                    diff+=Math.abs(answer.getValue() - candAnswers.getValue());
+                    diff+= 6-Math.abs(answer.getValue() - (candAnswers.getValue()));
                     break;
                 }
             }
         }
-
-        return diff;
+        return Math.round(diff / (uAnswers.size()*6) * 100);
     }
 }

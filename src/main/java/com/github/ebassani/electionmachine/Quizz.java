@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -36,7 +37,6 @@ public class Quizz extends HttpServlet {
         } else {
             try {
                 id = UserDao.addAnonUser(req.getParameter("region"), req.getParameter("age"));
-                req.getSession().setAttribute("user_id", id);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -67,7 +67,15 @@ public class Quizz extends HttpServlet {
             }
         }
 
-        resp.sendRedirect("/result.jsp");
+
+        if (req.getSession().getAttribute("user_id") != null) {
+            resp.sendRedirect("/");
+        } else {
+            req.setAttribute("id", id);
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/result.jsp");
+            dispatcher.forward(req, resp);
+        }
 
     }
 }

@@ -19,20 +19,14 @@
 
     Integer id= 0;
 
-    if (request.getSession().getAttribute("user_id") != null) {
-        id = (Integer) request.getSession().getAttribute("user_id");
-        try {
-            if (Util.isCandidate(id)){
-                response.sendRedirect("/");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    } else {
-
+    try {
+        id = (Integer) request.getAttribute("id");
+    } catch (Exception e) {
+        response.sendRedirect("/");
     }
 
-    request.getSession().removeAttribute("user_id");
+    out.println(id);
+
 
     List<Answer> answers = null;
     try {
