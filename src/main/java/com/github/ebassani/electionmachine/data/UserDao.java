@@ -88,7 +88,7 @@ public class UserDao {
         statement.setString(7, user.getRegion());
         statement.setInt(8, user.getAge());
         statement.executeUpdate();
-        ResultSet rs = statement.executeQuery("SELECT LAST_INSERT_ID();");
+        ResultSet rs = statement.executeQuery("SELECT LAST_INSERT_ID()");
         rs.next();
         return rs.getInt(1);
     }
@@ -102,7 +102,7 @@ public class UserDao {
         statement.setString(2, age);
         statement.executeUpdate();
 
-        ResultSet rs = statement.executeQuery();
+        ResultSet rs = statement.executeQuery("SELECT LAST_INSERT_ID()");
         rs.next();
         return rs.getInt(1);
     }
