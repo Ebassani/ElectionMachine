@@ -25,11 +25,16 @@
         <div class="buttons__users"><a href="<c:url value="/user-management"/>">Users</a></div>
         <div class="buttons__questions"><a href="<c:url value="/admQuestions.jsp"/>">Questions</a></div>
         <%
-        } else {
+        } else if (Util.isCandidate(Util.isSomebodyloggedIn(request.getSession()))){
+        %>
+        <div class="buttons__logout"><a href="<c:url value="/logout"/>">Logout</a></div>
+        <div class="buttons__questions"><a href="<c:url value="/candidateQuestions.jsp"/>">Questions</a></div>
+        <%
+            } else {
         %>
         <div class="buttons__logout"><a href="<c:url value="/logout"/>">Logout</a></div>
         <%
-                    }
+        }
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
