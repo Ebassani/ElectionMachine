@@ -36,6 +36,7 @@ public class Quizz extends HttpServlet {
         } else {
             try {
                 id = UserDao.addAnonUser(req.getParameter("region"), req.getParameter("age"));
+                req.getSession().setAttribute("user_id", id);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

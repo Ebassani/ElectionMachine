@@ -36,6 +36,16 @@ public class Util {
         return rs.getBoolean("is_admin");
     }
 
+    public static boolean isCandidate(int id) throws SQLException {
+        PreparedStatement statement = db.conn.prepareStatement("SELECT * from users where id=?");
+        statement.setInt(1, id);
+        ResultSet rs = statement.executeQuery();
+
+        rs.next();
+
+        return rs.getBoolean("is_candidate");
+    }
+
     public static String hashPassword(String password) {
         char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/<>+-*".toCharArray();
         StringBuilder sb = new StringBuilder();

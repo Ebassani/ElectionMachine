@@ -1,11 +1,10 @@
 <%@ page import="com.github.ebassani.electionmachine.data.model.User" %>
-<%@ page import="java.util.List" %>
 <%@ page import="com.github.ebassani.electionmachine.data.model.Answer" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="com.github.ebassani.electionmachine.data.AnswerDao" %>
 <%@ page import="com.github.ebassani.electionmachine.data.UserDao" %>
 <%@ page import="java.sql.SQLException" %>
-<%@ page import="java.util.Comparator" %>
+<%@ page import="java.util.*" %>
+<%@ page import="com.github.ebassani.electionmachine.Util" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +16,30 @@
 </head>
 <body>
 <%
-    List<Answer> answers = AnswerDao.getUserAnswers((int) request.getSession().getAttribute("user_id"));
+
+    Integer id= 0;
+
+    if (request.getSession().getAttribute("user_id") != null) {
+        id = (Integer) request.getSession().getAttribute("user_id");
+        try {
+            if (Util.isCandidate(id)){
+                response.sendRedirect("/");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    } else {
+
+    }
+
+    request.getSession().removeAttribute("user_id");
+
+    List<Answer> answers = null;
+    try {
+        answers = AnswerDao.getUserAnswers(id);
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
 
     List<User> users = null;
 
@@ -27,18 +49,25 @@
         e.printStackTrace();
     }
 
+    assert users != null;
     for (User user : users) {
         try {
+            assert answers != null;
             int diff= AnswerDao.compareAnswers(answers,AnswerDao.getUserAnswers(user.getId()));
             user.setDiffSum(diff);
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    users.sort(Comparator.comparingInt(User::getDiffSum));
+    users.sort(new Comparator<User>() {
+        @Override
+        public int compare(User u1, User u2) {
+            return u1.getDiffSum() - (u2.getDiffSum());
+        }
+    });
 
     for (int i=0;i<5 && i<users.size();i++){
-        out.println(users.get(i));
+        out.println(users.get(i).getNames()+" "+users.get(i).getId()+" " + users.get(i).getDiffSum());
     }
 %>
 
