@@ -1,6 +1,8 @@
 <%@ page import="com.github.ebassani.electionmachine.data.QuestionDao" %>
 <%@ page import="com.github.ebassani.electionmachine.data.model.Question" %>
 <%@ page import="java.sql.SQLException" %>
+<%@ page import="com.github.ebassani.electionmachine.data.model.Region" %>
+<%@ page import="com.github.ebassani.electionmachine.data.RegionDao" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,24 +59,24 @@
             <input type="number" name="age" value="Your age" required min="18" max="110">
             <label for="region" class="age-region-text">Choose a Region:</label>
             <select name="region" id="region" required>
-                <option value="Ahvenanmaa">Ahvenanmaa</option>
-                <option value="Etelä-Karjala">Etelä-Karjala</option>
-                <option value="Etelä-Pohjanmaa">Etelä-Pohjanmaa</option>
-                <option value="Kainuu">Kainuu</option>
-                <option value="Kanta-Häme">Kanta-Häme</option>
-                <option value="Keski-Pohjanmaa">Keski-Pohjanmaa</option>
-                <option value="Keski-Suomi">Keski-Suomi</option>
-                <option value="Kymenlaakso">Kymenlaakso</option>
-                <option value="Lappi">Lappi</option>
-                <option value="Päijät-Häme">Päijät-Häme</option>
-                <option value="Pirkanmaa">Pirkanmaa</option>
-                <option value="Pohjanmaa">Pohjanmaa</option>
-                <option value="Pohjois-Karjala">Pohjois-Karjala</option>
-                <option value="Pohjois-Pohjanmaa">Pohjois-Pohjanma</option>
-                <option value="Pohjois-Savo">Pohjois-Savo</option>
-                <option value="Satakunta">Satakunta</option>
-                <option value="Uusimaa">Uusimaa</option>
-                <option value="Varsinais-Suomi">Varsinais-Suomi</option>
+                <%
+                    try
+                    {
+                        Region[] array = RegionDao.getRegions().toArray(new Region[0]);
+                        for(Region region: array){
+                            String r = region.getRegion();
+
+
+                %>
+                <option value="<%out.print(r); %>"><%out.print(r); %></option>
+
+                <%
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                %>
 
             </select>
         </div>

@@ -4,6 +4,9 @@ public class Region {
 
     String region;
 
+    public Region() {
+    }
+
     public String getRegion() {
         return region;
     }
