@@ -2,18 +2,20 @@
 @import "reset";
 @import "common";
 
+
+:root {
+  --input-size: clamp(0.9rem, 5vw, 1.3rem);
+}
+
 body {
-  min-height: 100vh;
-  width: 100vw;
   background-image: url("../images/background1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  overflow-x: hidden;
 }
 
 .main {
-  height: 100vh;
+  height: max(100vh, 600px);
 }
 
 .link-start {
@@ -61,26 +63,37 @@ body {
 
 
 //QUIZ PAGE
-.question{
-  display: flex;
-  font-size: 2em;
-  flex-direction: column;
-  min-height: 100vh;
-  width: 100vw;
-  justify-content: center;
-  align-items: center;
+.questions {
+  display: grid;
+  row-gap: 0.8em;
+
+  margin-inline: auto;
+  font-size: 1.4rem;
+  width: calc(100% - 2em);
+  justify-items: center;
 }
-.statement{
+
+.question {
+  display: grid;
+  grid-template-columns: auto;
+  row-gap: 15px;
+}
+
+.divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.3);
+  width: min(80%, 500px);
+  margin-inline: auto;
+  position: relative;
+}
+
+.statement {
   color: beige;
-  margin-bottom: 3%;
   width: 100%;
   text-align: center;
+}
 
-}
-.statement:first-child{
-  margin-top: 3%;
-}
-.decision{
+.decision {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -89,101 +102,106 @@ body {
   flex-wrap: wrap;
 
 }
-.options{
+
+.options {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 35%;
 }
-.agree{
+
+.agree {
   font-size: 2rem;
   color: green;
   -webkit-text-stroke: 0.4px black;
 }
-.option-agree{
+
+.option-agree {
   border: 5px solid green;
-  border-radius: 40px;
-  margin-right: 3%;
+  border-radius: 9999px;
 }
-.option-agree:hover{
+
+.option-agree:hover {
   background-color: green;
   cursor: pointer;
 }
 
-.neutral > input{
+.neutral > input {
   border: 5px solid grey;
-  border-radius: 20px;
-  min-width: 1.5rem;
-  min-height: 1.5rem;
-  margin-right: 3%;
+  border-radius: 9999px;
+  min-width: calc(1 * var(--input-size));
+  min-height: calc(1 * var(--input-size));
   display: block;
 }
-.neutral:hover{
+
+.neutral:hover {
   background-color: gray;
   cursor: pointer;
 }
-.disagree{
+
+.disagree {
   font-size: 2rem;
   color: red;
   -webkit-text-stroke: 0.9px black;
-  margin-bottom: 4%;
 }
-.option-disagree{
-  border: 4px solid red;
-  border-radius: 50px;
-  margin-left: 3%;
 
+.option-disagree {
+  border: 4px solid red;
+  border-radius: 9999px;
 }
-.option-disagree:hover{
+
+.option-disagree:hover {
   background-color: red;
   cursor: pointer;
 }
 
-.option-agree:first-child > input{
-  min-width: 4.5rem;
-  min-height: 4.5rem;
+.option-agree:first-child > input {
+  width: calc(3 * var(--input-size));
+  height: calc(3 * var(--input-size));
   display: block;
+}
 
-}
-.option-agree:nth-child(2) > input{
-  min-width: 3.5rem;
-  min-height:  3.5rem;
+.option-agree:nth-child(2) > input {
+  width: calc(2.5 * var(--input-size));
+  height: calc(2.5 * var(--input-size));
   display: block;
 }
+
 .option-agree:nth-child(3) > input {
-  min-width: 2.5rem;
-  min-height: 2.5rem;
+  width: calc(2 * var(--input-size));
+  height: calc(2 * var(--input-size));
   display: block;
 }
 
-.option-disagree:nth-child(5) > input{
-  min-height: 2.5rem;
-  min-width: 2.5rem;
+.option-disagree:nth-child(5) > input {
+  height: calc(1.5 * var(--input-size));
+  width: calc(1.5 * var(--input-size));
   margin-left: 0;
   display: block;
 }
-.option-disagree:nth-child(6) > input{
-  min-height: 3.5rem;
-  min-width: 3.5rem;
+
+.option-disagree:nth-child(6) > input {
+  height: calc(2 * var(--input-size));
+  width: calc(2 * var(--input-size));
   display: block;
 }
+
 .option-disagree:nth-child(7) > input {
-  min-height: 4.5rem;
-  min-width: 4.5rem;
+  height: calc(2.5 * var(--input-size));
+  width: calc(2.5 * var(--input-size));
   display: block;
 }
+
 .submit-button {
   color: beige;
   width: 150px;
   height: 40px;
   min-width: 150px;
-  min-height:40px;
+  min-height: 40px;
   font-size: 1.2rem;
   text-align: center;
   border-radius: 15px;
   user-select: none;
-  margin-bottom: 3%;
   background-image: linear-gradient(#4568dc, #004e92);
 }
 
@@ -194,9 +212,10 @@ body {
 .submit-button:active {
   border: none;
 }
-.age-region{
+
+.age-region {
   display: flex;
   flex-direction: column;
-  color:beige;
-  margin-bottom: 3%;
+  color: beige;
+  width: min(100% - 2em, 400px);
 }
