@@ -20,6 +20,10 @@ public class UserDao {
         }
     }
 
+    /**
+     *Function that goes through the database, saves all the users in an ArrayList
+     *and returns it as a List
+     */
     public static List<User> getUsers() throws SQLException {
         ResultSet rs = db.conn.createStatement().executeQuery("SELECT * FROM users");
         ArrayList<User> users = new ArrayList<>();
@@ -39,6 +43,10 @@ public class UserDao {
         return users;
     }
 
+    /**
+     *Function that goes through the database, saves all the users that are candidates in an ArrayList
+     *and returns it as a List
+     */
     public static List<User> getCandidates() throws SQLException {
         ResultSet rs = db.conn.createStatement().executeQuery("SELECT * FROM users WHERE is_candidate=1");
         ArrayList<User> users = new ArrayList<>();
@@ -58,6 +66,10 @@ public class UserDao {
         return users;
     }
 
+    /**
+     *Function that edits a user. It updates user(indicated by the id parameter) in the database
+     *with the information on User newUser
+     */
     public static void editUser(int id, User newUser) throws SQLException {
         PreparedStatement statement = db.conn.prepareStatement(
                 "UPDATE users SET is_admin=?, is_candidate=?, names=?, surnames=?, region=?, age=? WHERE id=?"

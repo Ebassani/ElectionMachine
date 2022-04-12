@@ -25,7 +25,6 @@ public class QuestionDao {
      * This function gets a String text and generates, in the database, a question with it.
      * It also creates a neutral answers for all candidates,
      * since they should have already answered the form
-     * @param text
      */
     public static void createQuestion(String text) {
         try {
@@ -54,8 +53,6 @@ public class QuestionDao {
 
     /**
      * Function that edits a question. It changes the text on the question that has its ID informed
-     * @param text
-     * @param id
      */
     public static void updateQuestion(String text, int id) {
         try {
@@ -83,8 +80,6 @@ public class QuestionDao {
 
     /**
      * Function that goes through the database, saves all the questions in an array and return this array
-     * @return
-     * @throws SQLException
      */
     public static Question[] getQuestions() throws SQLException {
 

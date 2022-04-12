@@ -22,8 +22,6 @@ public class AnswerDao {
 
     /**
      * Function that adds an answer to the database, requires an Answer object
-     * @param answer
-     * @throws SQLException
      */
     public static void addAnswer(Answer answer) throws SQLException {
         PreparedStatement statement = db.conn.prepareStatement(
@@ -38,9 +36,6 @@ public class AnswerDao {
     /**
      * This function searches the database for answers that were answered by the user referred
      * in the parameters and returns them in the form of a List<Answer>
-     * @param id
-     * @return
-     * @throws SQLException
      */
     public static List<Answer> getUserAnswers(int id) throws SQLException {
         ArrayList<Answer> answers = new ArrayList<>();
@@ -63,9 +58,6 @@ public class AnswerDao {
      * This function requires 2 Lists of Answer for a comparison, the function checks the similarities between
      * both and return a number between 0 and 100. 100 being 2 identical sets of answers and 0
      * being 2 sets of completely opposite answers
-     * @param uAnswers
-     * @param cAnswers
-     * @return
      */
     public static int compareAnswers(List<Answer> uAnswers, List<Answer> cAnswers) {
         float diff=0;
