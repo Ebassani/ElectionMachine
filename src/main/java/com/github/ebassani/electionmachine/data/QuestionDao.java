@@ -100,8 +100,6 @@ public class QuestionDao {
         return questions.toArray(new Question[0]);
     }
 
-    //
-
     /**
      * Returns a question based on the id informed by the parameter
      */

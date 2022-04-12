@@ -20,6 +20,11 @@ public class RegionDao {
         }
     }
 
+    /**
+     * Function that goes through the database, saves all the regions in an array and return this array
+     * @return
+     * @throws SQLException
+     */
     public static List<Region> getRegions() throws SQLException {
         ResultSet rs = db.conn.createStatement().executeQuery("SELECT * FROM regions");
         ArrayList<Region> regions = new ArrayList<>();
