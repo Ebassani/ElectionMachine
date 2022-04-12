@@ -20,8 +20,7 @@ import java.util.stream.Collectors;
 )
 public class SaveUser extends HttpServlet {
 
-    public SaveUser() throws Exception {
-    }
+    public SaveUser() {}
 
     @Override
     public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {

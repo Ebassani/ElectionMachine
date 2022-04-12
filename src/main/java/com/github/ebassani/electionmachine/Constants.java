@@ -4,6 +4,10 @@ import java.io.File;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * The [Constants] util class holds all the constants that are important for the program. They are technically
+ * environment variables.
+ */
 public class Constants {
 
     public static String DB_ADDRESS;
@@ -12,6 +16,9 @@ public class Constants {
     public static String DB_USERNAME;
     public static String DB_PASSWORD;
 
+    /**
+     * Loads all environment variables from the secrets.txt file
+     */
     public static void load() throws Exception {
         DB_ADDRESS = loadSecret("DB_ADDRESS");
         DB_PORT = loadSecret("DB_PORT");
@@ -20,6 +27,11 @@ public class Constants {
         DB_PASSWORD = loadSecret("DB_PASSWORD");
     }
 
+    /**
+     * Loads one secret from a file containing environment variables
+     * @param name name of the file
+     * @return a String containing the value of the secret
+     */
     private static String loadSecret(String name) throws Exception {
 //        System.out.println(new File("secrets.txt").getAbsolutePath());
         Scanner scanner = new Scanner(new File("secrets.txt"));

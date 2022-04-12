@@ -10,6 +10,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Main utility class holding all the useful methods.
+ */
 public class Util {
 
     static Database db;
@@ -22,10 +25,16 @@ public class Util {
         }
     }
 
+    /**
+     * Returns the id of the user that's logged in.
+     */
     public static Integer isSomebodyloggedIn(HttpSession session) {
         return (Integer) session.getAttribute("user_id");
     }
 
+    /**
+     * Returns true if the user with the id is an admin.
+     */
     public static boolean isAdmin(int id) throws SQLException {
         PreparedStatement statement = db.conn.prepareStatement("SELECT * from users where id=?");
         statement.setInt(1, id);
@@ -36,6 +45,9 @@ public class Util {
         return rs.getBoolean("is_admin");
     }
 
+    /**
+     * Returns true if the user with the id is a candidate.
+     */
     public static boolean isCandidate(int id) throws SQLException {
         PreparedStatement statement = db.conn.prepareStatement("SELECT * from users where id=?");
         statement.setInt(1, id);
@@ -46,6 +58,9 @@ public class Util {
         return rs.getBoolean("is_candidate");
     }
 
+    /**
+     * Hashes the password into a String that's savable into the database.
+     */
     public static String hashPassword(String password) {
         char[] chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/<>+-*".toCharArray();
         StringBuilder sb = new StringBuilder();
@@ -64,28 +79,4 @@ public class Util {
 
         return sb.toString();
     }
-//
-//    /**
-//     * Read the object from Base64 string.
-//     */
-//    public static Object fromString(String s) throws IOException,
-//            ClassNotFoundException {
-//        byte[] data = Base64.getDecoder().decode(s);
-//        ObjectInputStream ois = new ObjectInputStream(
-//                new ByteArrayInputStream(data));
-//        Object o = ois.readObject();
-//        ois.close();
-//        return o;
-//    }
-//
-//    /**
-//     * Write the object to a Base64 string.
-//     */
-//    public static String toString(Serializable o) throws IOException {
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        ObjectOutputStream oos = new ObjectOutputStream(baos);
-//        oos.writeObject(o);
-//        oos.close();
-//        return Base64.getEncoder().encodeToString(baos.toByteArray());
-//    }
 }

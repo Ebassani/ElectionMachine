@@ -6,6 +6,10 @@ import javax.servlet.annotation.WebListener;
 
 @WebListener
 public class StartupListener implements ServletContextListener {
+
+    /**
+     * Runs on the beginning to load all env variables from the secrets.txt file
+     */
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Context is being initialized.");
