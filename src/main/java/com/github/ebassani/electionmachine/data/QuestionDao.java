@@ -21,7 +21,12 @@ public class QuestionDao {
         }
     }
 
-    // Function that creates a question, requires the text.
+    /**
+     * This function gets a String text and generates, in the database, a question with it.
+     * It also creates a neutral answers for all candidates,
+     * since they should have already answered the form
+     * @param text
+     */
     public static void createQuestion(String text) {
         try {
             PreparedStatement statement = db.conn.prepareStatement("INSERT INTO questions (text) VALUES (?)");
@@ -47,7 +52,11 @@ public class QuestionDao {
         }
     }
 
-    // Function that edits a question, changes the text on the question that has its ID informed
+    /**
+     * Function that edits a question. It changes the text on the question that has its ID informed
+     * @param text
+     * @param id
+     */
     public static void updateQuestion(String text, int id) {
         try {
             PreparedStatement statement = db.conn.prepareStatement("UPDATE questions SET text=? WHERE id=?");
@@ -59,7 +68,10 @@ public class QuestionDao {
         }
     }
 
-    // Function that deletes the question of whose ID was put in the parameter
+    /**
+     * Function that deletes the question of whose ID was put in the parameter
+     * @param id
+     */
     public static void deleteQuestion(int id) {
         try {
             db.conn.createStatement().executeUpdate("DELETE FROM answers WHERE question_id='" + id + "'");
@@ -69,7 +81,11 @@ public class QuestionDao {
         }
     }
 
-    // Function returns an array that contains all the questions that can be used to print questions
+    /**
+     * Function that goes through the database, saves all the questions in an array and return this array
+     * @return
+     * @throws SQLException
+     */
     public static Question[] getQuestions() throws SQLException {
 
         ResultSet resultSet = db.conn.createStatement().executeQuery("SELECT * FROM questions");
