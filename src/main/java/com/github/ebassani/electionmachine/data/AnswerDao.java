@@ -33,6 +33,16 @@ public class AnswerDao {
         statement.executeUpdate();
     }
 
+    public static void editAnswerValue(int questionId, int userId, int newValue) throws SQLException {
+        PreparedStatement statement = db.conn.prepareStatement(
+                "UPDATE answers SET value=? WHERE user_id=? AND question_id=?"
+        );
+        statement.setInt(1, newValue);
+        statement.setInt(2, userId);
+        statement.setInt(3, questionId);
+        statement.executeUpdate();
+    }
+
     /**
      * This function searches the database for answers that were answered by the user referred
      * in the parameters and returns them in the form of a List<Answer>

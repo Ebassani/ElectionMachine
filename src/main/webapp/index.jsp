@@ -28,7 +28,7 @@
         } else if (Util.isCandidate(Util.isSomebodyloggedIn(request.getSession()))){
         %>
         <div class="buttons__logout"><a href="<c:url value="/logout"/>">Logout</a></div>
-        <div class="buttons__questions"><a href="<c:url value="/candidateQuestions.jsp"/>">Questions</a></div>
+        <div class="buttons__questions"><a href="<c:url value="/candidateQuestions.jsp"/>">Edit questions</a></div>
         <%
             } else {
         %>

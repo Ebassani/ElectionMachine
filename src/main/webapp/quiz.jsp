@@ -69,7 +69,6 @@
 
                 %>
                 <option value="<%out.print(r); %>"><%out.print(r); %></option>
-
                 <%
                         }
                     } catch (SQLException e) {

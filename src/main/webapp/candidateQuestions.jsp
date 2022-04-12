@@ -1,11 +1,34 @@
-<%@
-        page import="com.github.ebassani.electionmachine.data.QuestionDao,
-                     com.github.ebassani.electionmachine.data.model.Question,
-                     java.sql.SQLException,
-                     com.github.ebassani.electionmachine.Util"
-%>
+<%@ page import="com.github.ebassani.electionmachine.data.QuestionDao" %>
+<%@ page import="com.github.ebassani.electionmachine.data.model.Question" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="com.github.ebassani.electionmachine.data.model.Region" %>
+<%@ page import="com.github.ebassani.electionmachine.data.RegionDao" %>
+<%@ page import="com.github.ebassani.electionmachine.Util" %>
+<%@ page import="com.github.ebassani.electionmachine.data.model.Answer" %>
+<%@ page import="com.github.ebassani.electionmachine.data.AnswerDao" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.github.ebassani.electionmachine.data.model.User" %>
+<%@ page import="com.github.ebassani.electionmachine.data.UserDao" %>
 <%@ page import="java.util.Objects" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 
+<%
+    // check if the candidate is logged in
+    int uid = 0;
+    if (request.getSession().getAttribute("user_id") != null) {
+        uid = (int) request.getSession().getAttribute("user_id");
+        boolean isCandidate;
+        try {
+            isCandidate = Util.isCandidate(uid);
+            if (!isCandidate) {
+                response.sendRedirect("/index.jsp");
+            }
+        } catch (SQLException ignored) {
+        }
+    } else {
+        response.sendRedirect("/login");
+    }
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,72 +36,102 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Questions</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/style/question-management.css">
-    <script src="${pageContext.request.contextPath}/js/question-management.js"></script>
+    <link rel="stylesheet" href="style/style.css">
+    <title>Title</title>
 </head>
 <body>
-
-<div class="header">
-    <div class="left">
-        <a href=""><h1 style="color: snow">Questions</h1></a>
-    </div>
-    <div class="right">
-        <a class="nav-element" href="${pageContext.request.contextPath}/logout">Log Out</a>
-    </div>
-</div>
-
-<%
-
-    if (request.getSession().getAttribute("user_id") != null) {
-        int uId = (int) request.getSession().getAttribute("user_id");
-        boolean isCandidate;
-        try {
-            isCandidate = Util.isCandidate(uId);
-            if (!isCandidate) {
-                response.sendRedirect("/index.jsp");
-            }
-        } catch (SQLException ignored) {}
-    } else {
-        response.sendRedirect("/login");
-    }
-
-    Question[] questions = null;
-    try {
-        questions = QuestionDao.getQuestions();
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-%>
-<%
-    for (int i = 0; i < Objects.requireNonNull(questions).length; i++) {
-%>
-<div>
-
+<form method="post" action="${pageContext.request.contextPath}/save-user">
     <div class="questions">
-        <p class="text"><%out.print(questions[i].getQuestion());%></p>
-        <div>
-            <button class="button"onclick="getQuestion('<%out.print(questions[i].getId());%>','<%out.print(questions[i].getQuestion());%>')">
-                Edit
-            </button>
-    </div>
-</div>
-                <% } %>
-<div id="edit" class="dialog popup hidden">
-    <h3>Edit question</h3>
-    <form method='post' action='${pageContext.request.contextPath}/questionHandler'>
-        <input type="hidden" id='q_id' name='id' value=''>
-        <input type="text" class="border" id='question' name='question' placeholder='Your question here' value=''>
-        <div>
-            <input class="button" type="submit"  value="Submit" >
-            <button class="button" onclick="toHidden('edit')" type='button'>Cancel</button>
+        <%
+            try {
+                Question[] array = QuestionDao.getQuestions();
+                List<Answer> answers = AnswerDao.getUserAnswers(uid);
+                for (Question question : array) {
+                    for (Answer answer : answers) {
+                        if (answer.getQuestionId() == question.getId()) {
+                            String q = question.getQuestion();
+                            int n = question.getId();
+                            int v = answer.getValue();
+                            System.out.println(v);
+        %>
+        <div class="question">
+            <div class="statement"><% out.print(q); %></div>
+            <div class="decision">
+                <div class="agree">Agree</div>
+                <div class="options">
+                    <div class="option-agree"><input <% if (v==1) out.print("checked"); %> type="radio" required
+                                                                                           value="1"
+                                                                                           name="choice<% out.print(n);%>">
+                    </div>
+                    <div class="option-agree"><input <% if (v==2) out.print("checked"); %> type="radio" required
+                                                                                           value="2"
+                                                                                           name="choice<% out.print(n);%>">
+                    </div>
+                    <div class="option-agree"><input <% if (v==3) out.print("checked"); %> type="radio" required
+                                                                                           value="3"
+                                                                                           name="choice<% out.print(n);%>">
+                    </div>
+                    <div class="neutral"><input <% if (v==4) out.print("checked"); %> type="radio" required value="4"
+                                                                                      name="choice<% out.print(n);%>">
+                    </div>
+                    <div class="option-disagree"><input <% if (v==5) out.print("checked"); %> type="radio" required
+                                                                                              value="5"
+                                                                                              name="choice<% out.print(n);%>">
+                    </div>
+                    <div class="option-disagree"><input <% if (v==6) out.print("checked"); %> type="radio" required
+                                                                                              value="6"
+                                                                                              name="choice<% out.print(n);%>">
+                    </div>
+                    <div class="option-disagree"><input <% if (v==7) out.print("checked"); %> type="radio" required
+                                                                                              value="7"
+                                                                                              name="choice<% out.print(n);%>">
+                    </div>
+                </div>
+                <div class="disagree">Disagree</div>
+            </div>
         </div>
-    </form>
-</div>
+        <div class="divider"></div>
+        <%
+                        }
+                    }
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        %>
+
+        <div class="age-region">
+            <label class="age-region-text">Insert your Age</label>
+            <%
+                User candidate = UserDao.getUser(uid);
+            %>
+            <input type="number" name="age" value="<% out.print(candidate.getAge()); %>" required min="18" max="110">
+            <label for="region" class="age-region-text">Choose a Region:</label>
+            <select name="region" id="region" required>
+                <%
+                    try {
+                        Region[] array = RegionDao.getRegions().toArray(new Region[0]);
+                        for (Region region : array) {
+                            String r = region.getRegion();
 
 
+                %>
+                <option <% if (Objects.equals(candidate.getRegion(), region.getRegion())) out.print("selected"); %>
+                        value="<%out.print(r); %>"><%out.print(r); %></option>
+                <%
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
 
-<div onclick="toHidden('edit')" id="overlay" class="overlay hidden"></div>
+                %>
 
+            </select>
+        </div>
+        <input type="submit" value="Save" class="submit-button">
+    </div>
+
+</form>
 </body>
 </html>

@@ -56,7 +56,7 @@
     users.sort(new Comparator<User>() {
         @Override
         public int compare(User u1, User u2) {
-            return u1.getDiffSum() - (u2.getDiffSum());
+            return u2.getDiffSum() - u1.getDiffSum();
         }
     });
 

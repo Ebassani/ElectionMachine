@@ -20,6 +20,57 @@ public class UserDao {
         }
     }
 
+    public static void editUserAge(int userId, int newAge) {
+        try {
+            PreparedStatement statement = db.conn.prepareStatement(
+                    "UPDATE users SET age=? WHERE id=?"
+            );
+            statement.setInt(1, newAge);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void editUserRegion(int userId, String newRegion) {
+        try {
+            PreparedStatement statement = db.conn.prepareStatement(
+                    "UPDATE users SET region=? WHERE id=?"
+            );
+            statement.setString(1, newRegion);
+            statement.setInt(2, userId);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static User getUser(int id) {
+        User user = new User();
+        try {
+            PreparedStatement statement = db.conn.prepareStatement(
+                    "SELECT * FROM users WHERE id=? LIMIT 1"
+            );
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            rs.next();
+            user.setId(rs.getInt("id"));
+            user.setEmail(rs.getString("email"));
+            user.setPasswordHash(rs.getString("password_hash"));
+            user.setAdmin(rs.getBoolean("is_admin"));
+            user.setCandidate(rs.getBoolean("is_candidate"));
+            user.setNames(rs.getString("names"));
+            user.setSurnames(rs.getString("surnames"));
+            user.setRegion(rs.getString("region"));
+            user.setAge(rs.getInt("age"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return user;
+    }
+
     /**
      *Function that goes through the database, saves all the users in an ArrayList
      *and returns it as a List
