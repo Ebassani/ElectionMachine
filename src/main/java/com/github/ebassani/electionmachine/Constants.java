@@ -10,6 +10,7 @@ import java.util.Scanner;
  */
 public class Constants {
 
+    // comment
     public static String DB_ADDRESS;
     public static String DB_PORT;
     public static String DB_DATABASE;
