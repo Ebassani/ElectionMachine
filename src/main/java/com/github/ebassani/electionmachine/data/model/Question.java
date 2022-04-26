@@ -1,13 +1,12 @@
 package com.github.ebassani.electionmachine.data.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "questions", schema = "election_machine")
 public class Question {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
