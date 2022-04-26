@@ -92,7 +92,7 @@
 
 <div id="create" class="dialog popup hidden">
     <h3>Write the new question here:</h3>
-    <form method='post' action='${pageContext.request.contextPath}/questionHandler'>
+    <form method='post' action='${pageContext.request.contextPath}/rest/questionhandler/add'>
         <input class="border" required type="text" name='question'>
         <div>
             <input class="button" type="submit">
