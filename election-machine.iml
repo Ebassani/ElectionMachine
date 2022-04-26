@@ -27,6 +27,7 @@
           <factory-entry name="hello" />
         </datasource-mapping>
         <naming-strategy-map />
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/webapp/META-INF/persistence.xml" />
       </configuration>
     </facet>
   </component>
