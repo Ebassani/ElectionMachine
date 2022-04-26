@@ -46,6 +46,9 @@
             try {
                 Question[] array = QuestionDao.getQuestions();
                 List<Answer> answers = AnswerDao.getUserAnswers(uid);
+
+                if (answers.size() != array.length) response.sendRedirect("/quiz.jsp");
+
                 for (Question question : array) {
                     for (Answer answer : answers) {
                         if (answer.getQuestionId() == question.getId()) {

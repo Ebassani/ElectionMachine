@@ -3,6 +3,10 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="com.github.ebassani.electionmachine.data.model.Region" %>
 <%@ page import="com.github.ebassani.electionmachine.data.RegionDao" %>
+<%@ page import="com.github.ebassani.electionmachine.data.model.Answer" %>
+<%@ page import="com.github.ebassani.electionmachine.data.AnswerDao" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.github.ebassani.electionmachine.Util" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,6 +25,17 @@
         <%
             try {
                 Question[] array = QuestionDao.getQuestions();
+                int uid;
+                boolean isCandidate;
+                if (request.getSession().getAttribute("user_id") != null) {
+                    uid = (int) request.getSession().getAttribute("user_id");
+                    isCandidate = Util.isCandidate(uid);
+                    if (isCandidate) {
+                        List<Answer> answers = AnswerDao.getUserAnswers(uid);
+                        if (answers.size() == array.length) response.sendRedirect("/candidateQuestions.jsp");
+                    }
+                }
+
                 for (Question question : array) {
 
                     String q = question.getQuestion();
@@ -31,9 +46,12 @@
             <div class="decision">
                 <div class="agree">Agree</div>
                 <div class="options">
-                    <div class="option-agree"><input type="radio" required value="1" name="choice<% out.print(n);%>"></div>
-                    <div class="option-agree"><input type="radio" required value="2" name="choice<% out.print(n);%>"></div>
-                    <div class="option-agree"><input type="radio" required value="3" name="choice<% out.print(n);%>"></div>
+                    <div class="option-agree"><input type="radio" required value="1" name="choice<% out.print(n);%>">
+                    </div>
+                    <div class="option-agree"><input type="radio" required value="2" name="choice<% out.print(n);%>">
+                    </div>
+                    <div class="option-agree"><input type="radio" required value="3" name="choice<% out.print(n);%>">
+                    </div>
                     <div class="neutral"><input type="radio" required value="4" name="choice<% out.print(n);%>"></div>
                     <div class="option-disagree"><input type="radio" required value="5" name="choice<% out.print(n);%>">
                     </div>
@@ -60,10 +78,9 @@
             <label for="region" class="age-region-text">Choose a Region:</label>
             <select name="region" id="region" required>
                 <%
-                    try
-                    {
+                    try {
                         Region[] array = RegionDao.getRegions().toArray(new Region[0]);
-                        for(Region region: array){
+                        for (Region region : array) {
                             String r = region.getRegion();
 
 

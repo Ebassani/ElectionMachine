@@ -25,12 +25,16 @@ public class Quizz extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-
         int id = 0;
-        try {
-            id = UserDao.addAnonUser(req.getParameter("region"), req.getParameter("age"));
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+        if (req.getSession().getAttribute("user_id") != null) {
+            id = (int) req.getSession().getAttribute("user_id");
+        } else {
+            try {
+                id = UserDao.addAnonUser(req.getParameter("region"), req.getParameter("age"));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
 
         Enumeration<String> tempParamNames = req.getParameterNames();
@@ -57,9 +61,13 @@ public class Quizz extends HttpServlet {
             }
         }
 
-        req.setAttribute("id", id);
-        RequestDispatcher dispatcher = getServletContext()
-                .getRequestDispatcher("/result.jsp");
-        dispatcher.forward(req, resp);
+        if (req.getSession().getAttribute("user_id") != null) {
+            resp.sendRedirect("/");
+        } else {
+            req.setAttribute("id", id);
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/result.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 }
