@@ -3,9 +3,6 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>
-  <component name="JavadocGenerationManager">
-    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/jdoc-election" />
-  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
