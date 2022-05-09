@@ -1,4 +1,5 @@
-package test21;
+package com.github.ebassani.electionmachine.data.model;
+
 
 import javax.persistence.*;
 
@@ -9,7 +10,7 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     int id;
-    String text;
+    String question;
 
     public Question() {
         super();
@@ -18,12 +19,12 @@ public class Question {
     public Question(int id, String question) {
         super();
         this.id = id;
-        this.text = question;
+        this.question = question;
     }
 
     public Question(String question) {
         super();
-        this.text = question;
+        this.question = question;
     }
 
     public int getId() {
@@ -31,6 +32,6 @@ public class Question {
     }
 
     public String getQuestion() {
-        return text;
+        return question;
     }
 }

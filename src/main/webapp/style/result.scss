@@ -1,0 +1,55 @@
+@import "reset";
+@import "common";
+
+body {
+  height: max(600px, 100vh);
+  background-image: url("../images/background1.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.heading {
+  text-align: center;
+  font-size: 3.5rem;
+  color: #f1f2e4;
+  padding: 1rem 0 3rem;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-auto-rows: 1fr;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: min(100% - 1.5rem, 800px);
+  margin-inline: auto;
+
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #b8b1b8;
+}
+
+.result {
+  display: grid;
+  grid-template-columns: 2fr 5fr;
+  justify-content: center;
+
+  .candidate {
+    text-align: end;
+    padding-right: 0.5em;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .bar-container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .bar {
+    height: 50%;
+  }
+}
