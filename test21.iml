@@ -22,7 +22,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
-          <factory-entry name="jpa247" />
+          <factory-entry name="jpa247" value="847e9dea-7d05-4ea0-8860-9542a8d9d558" />
         </datasource-mapping>
         <naming-strategy-map />
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />

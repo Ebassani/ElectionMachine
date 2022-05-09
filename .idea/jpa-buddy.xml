@@ -2,5 +2,7 @@
 <project version="4">
   <component name="JpaBuddyIdeaProjectConfig">
     <option name="defaultUnitInitialized" value="true" />
+    <option name="reverseEngineeringLastDbConnectionId" value="847e9dea-7d05-4ea0-8860-9542a8d9d558" />
+    <option name="reLastEntityCreationPackage" value="src/main/java/com/github/ebassani/electionmachine/data/entity" />
   </component>
 </project>

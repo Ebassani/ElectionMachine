@@ -28,7 +28,7 @@
 		-->
 		<init-param>
 		  <param-name>jersey.config.server.provider.packages</param-name>
-		  <param-value>test21</param-value>
+		  <param-value>com.github.ebassani.electionmachine</param-value>
 		</init-param>
 		<!--
 			This tells the server to load REST service when the server starts

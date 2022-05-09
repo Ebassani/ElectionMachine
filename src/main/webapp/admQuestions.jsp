@@ -71,7 +71,7 @@
 
 <div id="edit" class="dialog popup hidden">
     <h3>Edit question</h3>
-    <form method='post' action='${pageContext.request.contextPath}/questionHandler'>
+    <form method='post' action='${pageContext.request.contextPath}/rest/questions/update' onsubmit="setTimeout(() => {location.reload()}, 1000)">
         <input type="hidden" id='q_id' name='id' value=''>
         <input type="text" class="border" id='question' name='question' placeholder='Your question here' value=''>
         <div>
@@ -83,7 +83,7 @@
 
 <div id="delete" class="dialog popup hidden">
     <h3 style="margin-bottom: 1em">Are you sure you want to delete this question?</h3>
-    <form method='post' action='${pageContext.request.contextPath}/questionHandler'>
+    <form method='post' action='${pageContext.request.contextPath}/rest/questions/delete' onsubmit="setTimeout(() => {location.reload()}, 1000)">
         <input type="hidden" id='id' name='id' value=''>
         <input class="button" type="submit" value='YES'>
         <button class="button" onclick="toHidden('delete')" type='button'>NO</button>
@@ -92,7 +92,7 @@
 
 <div id="create" class="dialog popup hidden">
     <h3>Write the new question here:</h3>
-    <form method='post' action='${pageContext.request.contextPath}/rest/questionhandler/add'>
+    <form method='post' action='${pageContext.request.contextPath}/rest/questions/add' onsubmit="setTimeout(() => {location.reload()}, 1000)">
         <input class="border" required type="text" name='question'>
         <div>
             <input class="button" type="submit">
